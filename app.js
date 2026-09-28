@@ -9,7 +9,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.0';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.1';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_anshin';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'anshin.';
 var LS_PREF = LS + 'pref.v1';
@@ -89,12 +89,32 @@ function applyI18n(){
   applyBarSpace();
 }
 
-/* ヘッダーの名前: 正式名(そよぎ付き)が入りきらないときだけ、そよぎを抜いた短い名前にする(ヒロさん指示 2026-09-28) */
+/* ヘッダーの名前: 正式名(そよぎ付き)が入りきらないときだけ、そよぎを抜いた短い名前にする(ヒロさん指示 2026-09-28)
+   短い名前でも入らないとき(360px の en/de/fr など): ①1行のまま 1px ずつ小さく(14pxまで) ②折り返して(16〜13px)
+   ヘッダーの高さに収める ③それでも入らなければ 1行・14px で「…」 */
 function fitTitle(){
   var e = $('hd-title'); if(!e) return;
   var full = T('app.name'), s = T('app.short');
+  function over(){ return e.scrollWidth > e.clientWidth + 1; }
   e.textContent = full;
-  if(s !== 'app.short' && s !== full && e.scrollWidth > e.clientWidth + 1) e.textContent = s;
+  if(e.style) e.style.fontSize = '';
+  if(e.classList) e.classList.remove('wrap');
+  if(!over()) return;
+  if(s !== 'app.short' && s !== full){ e.textContent = s; if(!over()) return; }
+  if(typeof getComputedStyle !== 'function' || !e.style) return;
+  var px;
+  for(px = 18; px >= 14; px--){ e.style.fontSize = px + 'px'; if(!over()) return; }
+  var hd = $('hd'), hs = getComputedStyle(hd);
+  var room = hd.clientHeight - parseFloat(hs.paddingTop) - parseFloat(hs.paddingBottom);
+  e.classList.add('wrap');
+  for(px = 16; px >= 13; px--){
+    e.style.fontSize = px + 'px';
+    var es = getComputedStyle(e);
+    var textH = e.scrollHeight - parseFloat(es.paddingTop) - parseFloat(es.paddingBottom);
+    if(!over() && textH <= room + 1) return;
+  }
+  e.classList.remove('wrap');
+  e.style.fontSize = '14px';
 }
 if(typeof window !== 'undefined' && window.addEventListener) window.addEventListener('resize', function(){ fitTitle(); });
 /* ---- 見た目/音 ---- */
@@ -286,6 +306,24 @@ function toast(msg){
   toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 1800);
 }
 
+/* ---- クイック退出「× とじる」 ----
+   Play版(Capacitor)では外のサイトへの移動は外のブラウザに渡され、アプリは押した画面のまま裏に残る。
+   なので移る前に、開いている全画面(.ov=表示・免責)を閉じ、部屋を入口に戻してホームにしておく(Web版にも害はない) */
+function quickExit(){
+  try{
+    var ovs = document.querySelectorAll('.ov');
+    for(var i = 0; i < ovs.length; i++){ if(ovs[i].parentNode) ovs[i].parentNode.removeChild(ovs[i]); }
+    var ed = window.SCREENS && window.SCREENS.get('edit');
+    if(ed && typeof ed.reset === 'function') ed.reset();
+    showScreen('home');
+    /* ホームを描き直すと、同意前なら免責が出る。退出のあとは何も上に出さない */
+    var again = document.querySelectorAll('.ov');
+    for(var j = 0; j < again.length; j++){ if(again[j].parentNode) again[j].parentNode.removeChild(again[j]); }
+    var t = $('toast'); if(t && t.classList) t.classList.remove('show');
+  }catch(err){ console.error('quickExit error:', err); }
+  location.replace(EXIT_URL);
+}
+
 /* ---- 初期化 ---- */
 function init(){
   var navs = document.querySelectorAll('.nav-btn');
@@ -300,7 +338,7 @@ function init(){
     }
     showScreen('home');
   }, { silent:true });
-  Tap.bind($('hd-exit'), function(){ location.replace(EXIT_URL); }, { silent:true });
+  Tap.bind($('hd-exit'), quickExit, { silent:true });
 
   Tap.bind($('btn-fs'), function(){ pref.fs = (pref.fs + 1) % 3; applyBodyClass(); savePref(); applyI18n(); });
   Tap.bind($('btn-theme'), function(){ pref.theme = next(THEMES, pref.theme); applyTheme(); savePref(); applyI18n(); });

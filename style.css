@@ -205,8 +205,23 @@ input[type="file"].hidden{ display:none; }
 .toast.show{ opacity:1; }
 
 /* ======== ひとつずつ・そよぎ 固有 ======== */
-/* ヘッダーのアプリ名: 連打の痕跡を出さない(押下の沈み込みなし) */
+/* 緑の上の文字色(--on-brand)と ヘッダーのボタンの地(--hd-btn-bg)
+   くろ(既定)は緑が明るい(#43c08a)ので白い文字だと 2.3:1 しかない → 濃い緑の文字(7.2:1)。
+   × とじる の地は 半透明の白 をやめ、どのテーマでも 4.5:1 以上になる色にする */
+:root{ --on-brand:#fff; --hd-btn-bg:rgba(0,0,0,.28); }
+body[data-theme="dark"]{ --on-brand:#10231a; --hd-btn-bg:rgba(255,255,255,.35); }
+header#hd, .lang-label{ color:var(--on-brand); }
+.hd-btn{ background:var(--hd-btn-bg); color:var(--on-brand); }
+.btn.primary, .big-btn.primary, .chip.on, .ov-close{ color:var(--on-brand); }
+/* ヘッダーの右側の間を少し詰めて、アプリ名の場所を広くする */
+header#hd{ gap:10px; }
+#hd-right{ gap:10px; }
+/* ヘッダーのアプリ名: 連打の痕跡を出さない(押下の沈み込みなし)。
+   押せる範囲はヘッダーの高さいっぱい(上下の padding を足し、同じだけ負の margin で見た目は変えない=44px以上) */
+#hd-title{ padding:9px 0; margin:-9px 0; min-height:44px; }
 #hd-title.pressing{ transform:none; filter:none; }
+/* 短い名前でも1行に入らないとき(fitTitle が付ける): 折り返して小さめの字で入れる */
+#hd-title.wrap{ white-space:normal; line-height:1.1; text-overflow:clip; word-break:keep-all; }
 /* ホームの2ボタン(中立な文言だけ) */
 .big-btn.huge.home-now, .big-btn.huge.home-plan{ min-height:30vh; min-height:30dvh; margin-top:6px; }
 /* 固定バー(救急と窓口。#main と #navbar の間・横スクロール可) */
@@ -221,34 +236,55 @@ input[type="file"].hidden{ display:none; }
   font-weight:800; font-size:.95em; text-decoration:none; white-space:nowrap;
 }
 body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
-/* 1画面1動作の表示(.ov の上に) */
+/* 1画面1動作の表示(.ov の上に)
+   pl-top・pl-title・pl-nav は固定、pl-body だけがスクロールする。中身(pl-inner)は上下の margin:auto で真ん中に置き、
+   画面より高いときは上から並ぶ(頭が上に切れない・下はボタンの裏に隠れない) */
 .ov-player{ display:flex; flex-direction:column; padding-bottom:calc(20px + env(safe-area-inset-bottom)); }
 .pl-top{ display:flex; gap:8px; overflow-x:auto; flex-shrink:0; padding-bottom:6px; }
-.pl-title{ color:var(--sub); font-weight:700; font-size:.9em; margin:8px 0 0; text-align:center; }
-.pl-body{ flex:1 1 auto; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+.pl-title{ color:var(--sub); font-weight:700; font-size:.9em; margin:8px 0 0; text-align:center; flex-shrink:0; }
+.pl-body{ flex:1 1 auto; display:flex; flex-direction:column; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+.pl-inner{ margin:auto 0; padding:4px 0; }
 .pl-body .step-text{ margin:16px 0; white-space:pre-wrap; word-break:keep-all; }   /* 分かち書きの空白で折り返す(語の途中で切らない。長い1語は overflow-wrap:anywhere で収める) */
 .pl-label{ color:var(--sub); font-weight:700; text-align:center; font-size:1em; }
 .pl-calls{ display:flex; flex-direction:column; gap:8px; margin:8px 0; }
-.pl-calls .call-btn{ margin:0; }
+.pl-calls .call-btn{ margin:0; line-height:1.3; padding:10px 12px; display:flex; align-items:center; justify-content:center; overflow-wrap:anywhere; }
 .pl-count{ color:var(--sub); text-align:center; font-size:.9em; margin-top:6px; }
-.pl-nav{ display:flex; gap:10px; flex-shrink:0; margin-top:10px; }
-.pl-nav .btn{ flex:1; min-height:64px; font-size:1.15em; }
-.pl-nav .pl-close{ flex:0 0 30%; }
+/* まえ/つぎ/とじる: 文字の長さに合わせた幅。3つが1行に入らない言語・文字の大きさでは、入らないボタンだけ次の行へ回る
+   (文字を語の途中で折らない・枠の外に出さない) */
+.pl-nav{ display:flex; flex-wrap:wrap; gap:10px; flex-shrink:0; margin-top:10px; }
+.pl-nav .btn{ flex:1 1 auto; min-height:64px; font-size:1.15em; padding:0 10px; min-width:0; word-break:keep-all; overflow-wrap:anywhere; }
+/* 余った幅は まえ/つぎ に多く回す(いちばん押す「つぎ」を とじる より大きく=前の 7:3 の見た目に近づける。折り返しの判定は変わらない) */
+.pl-nav .pl-prev, .pl-nav .pl-next{ flex-grow:3; }
 /* 免責(初回) */
 .ov-agree .agree-p{ font-size:1.05em; margin:14px 0; }
 /* とうろくの へや */
-.edit-sec .edit-mark{ margin-left:auto; color:var(--brand); font-weight:800; font-size:1.3em; }
+.edit-sec .lbl{ min-width:0; overflow-wrap:anywhere; }   /* 長い1語(nl など)でも ✓ をボタンの中に残す */
+.edit-sec .edit-mark{ margin-left:auto; margin-inline-start:auto; margin-inline-end:0; flex:none; color:var(--brand); font-weight:800; font-size:1.3em; }
 .edit-back{ margin:0 0 10px; }
 .edit-close, .edit-done, .edit-add{ margin:14px 0; }
+/* なまえ+でんわ の行: 入力欄は行の幅いっぱい、「けす」はその下の行の端 */
+.edit-row{ flex-wrap:wrap; }
 .edit-row .grow{ display:flex; flex-direction:column; gap:6px; }
+.list li.edit-row .grow{ flex:1 1 100%; }   /* .list li .grow(flex:1)より強く */
+.edit-row .edit-del{ margin-inline-start:auto; }
 .edit-row input, .edit-line input{
   width:100%; font-size:1em; font-family:inherit; padding:10px; border:2px solid var(--line); border-radius:10px;
   background:var(--bg); color:var(--ink); min-width:0;
 }
-.edit-line{ gap:6px; }
+/* 1行1手順: 1行目=番号+入力欄(いっぱい)、2行目の端に ↑ ↓ ×(× は少し離して押し間違いを減らす) */
+.edit-line{ gap:6px; flex-wrap:wrap; }
 .edit-line .edit-num{ flex:none; width:1.6em; text-align:center; color:var(--sub); font-weight:700; }
+.list li.edit-line .edit-line-inp{ flex:1 1 calc(100% - 1.6em - 12px); }   /* .list li .grow(flex:1)より強く。12px = 行の gap(10px)+ゆとり */
 .edit-line .btn{ min-width:44px; padding:0 8px; flex:none; }
+.edit-line .edit-up{ margin-inline-start:auto; }
+.edit-line .edit-del{ margin-inline-start:14px; }
 .edit-line .btn:disabled{ opacity:.35; }
+/* 中身のある行の「けす」1回目(もういちど おすと けします) */
+.btn.danger.armed{ background:#b3261e; border-color:#b3261e; color:#fff; text-align:center; }
+.list li.edit-line .edit-del.armed{ flex:0 1 auto; min-width:0; }   /* 長い訳(de など)は折り返して行の中に収める */
+body[data-theme="dark"] .btn.danger.armed{ background:#b3261e; border-color:#ef9a9a; color:#fff; }
+/* トースト: 下ナビ+固定バー(119/110)の上に出す(--tabbar-h は app.js、--sos-h は lib.js が実寸を入れる) */
+.toast{ bottom:calc(var(--tabbar-h, 70px) + var(--sos-h, 68px) + 10px); }
 
 /* ======== 写真の取り込みとトリミング(photo.js) ======== */
 .photo-ov{

@@ -91,7 +91,7 @@ var ja = {
         plan:'ひとつの てじゅんを 1行で。「きいろ しんごうの とき」の あとに でます。',
         yellow:'まだ あぶなくは ないけれど、つかれている とき。やすみかたと、ちいさな いっぽを ひとつだけ。'
       },
-      name:'なまえ', tel:'でんわばんごう', addRow:'ついか', del:'けす',
+      name:'なまえ', tel:'でんわばんごう', addRow:'ついか', del:'けす', delAgain:'もういちど おすと けします',
       stepPh:'てじゅんを 1行で', addStep:'てじゅんを ついか', up:'うえへ', down:'したへ',
       yellowRest:'やすみかた(じぶんの ことばで)', yellowStep:'ちいさな いっぽ(ひとつだけ)',
       textPh:'ここに かきます', saved:'ほぞんしました ✓'
@@ -141,7 +141,7 @@ var en = {
         title:'Before you start',
         body1:'This app shows, one screen at a time, the steps you decided for yourself when you were well.',
         body2:'It is not a substitute for medical care.',
-        body3:'If you are in danger, call 119 (ambulance), 110 (police) or a helpline.',
+        body3:'If you are in danger, call 119 (ambulance) or 110 (police) in Japan, or a helpline.',
         body4:'To register your steps, tap the app name at the top 5 times in a row.',
         ok:'I understand'
       },
@@ -172,12 +172,12 @@ var en = {
         calm:'The breathing that works for you and the things that calm you when you touch them, in your own words.',
         signs:'The signs you decided mean "this is getting dangerous".',
         contacts:'Name and phone number. You do not have to fill in everything.',
-        windows:'119 (ambulance) and 110 (police) are always shown. Add other helplines yourself.',
+        windows:'119 (ambulance) and 110 (police), the emergency numbers in Japan, are always shown. Add other helplines yourself.',
         steps:'One step per line. They are shown from the top, one at a time.',
         plan:'One step per line. They are shown after "When the light is yellow".',
         yellow:'Not dangerous yet, but tired. How you rest, and just one small step.'
       },
-      name:'Name', tel:'Phone number', addRow:'Add', del:'Delete',
+      name:'Name', tel:'Phone number', addRow:'Add', del:'Delete', delAgain:'Tap again to delete',
       stepPh:'One step in one line', addStep:'Add a step', up:'Up', down:'Down',
       yellowRest:'How I rest (in my own words)', yellowStep:'One small step (just one)',
       textPh:'Write here', saved:'Saved ✓'
@@ -331,7 +331,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "Die Atmung, die Ihnen hilft, und die Dinge, die Sie beruhigen, wenn Sie sie anfassen, in Ihren eigenen Worten.",
         "signs": "Die Zeichen, bei denen Sie selbst festgelegt haben: „Jetzt wird es gefährlich“.",
         "contacts": "Name und Telefonnummer. Sie müssen nicht alles ausfüllen.",
-        "windows": "119 (Rettungsdienst) und 110 (Polizei) werden immer angezeigt. Weitere Anlaufstellen fügen Sie selbst hinzu.",
+        "windows": "Die japanischen Notrufnummern 119 (Rettungsdienst) und 110 (Polizei) werden immer angezeigt. Weitere Anlaufstellen fügen Sie selbst hinzu.",
         "steps": "Ein Schritt pro Zeile. Sie werden von oben nach unten einzeln angezeigt.",
         "plan": "Ein Schritt pro Zeile. Sie werden nach „Wenn die Ampel auf Gelb steht“ angezeigt.",
         "yellow": "Noch nicht gefährlich, aber müde. Wie Sie sich ausruhen, und nur ein kleiner Schritt."
@@ -340,6 +340,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Telefonnummer",
       "addRow": "Hinzufügen",
       "del": "Löschen",
+      "delAgain": "Zum Löschen noch einmal tippen",
       "stepPh": "Ein Schritt in einer Zeile",
       "addStep": "Schritt hinzufügen",
       "up": "Nach oben",
@@ -443,8 +444,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "btnNow": "Revenir ici et maintenant",
       "btnPlan": "Mon plan pour les moments difficiles",
       "sos": {
-        "call119": "119 Ambulance (Japon)",
-        "call110": "110 Police (Japon)",
+        "call119": "119 Ambulance",
+        "call110": "110 Police",
         "call": "Appeler"
       },
       "agree": {
@@ -504,6 +505,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Numéro de téléphone",
       "addRow": "Ajouter",
       "del": "Supprimer",
+      "delAgain": "Appuyez encore pour supprimer",
       "stepPh": "Une étape en une ligne",
       "addStep": "Ajouter une étape",
       "up": "Monter",
@@ -659,7 +661,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "La forma de respirar que ayuda y las cosas que calman al tocarlas, con palabras propias.",
         "signs": "Las señales que uno mismo decidió que significan «si pasa esto, es peligroso».",
         "contacts": "Nombre y número de teléfono. No hace falta escribir todo.",
-        "windows": "El 119 (ambulancia) y el 110 (policía) aparecen siempre. Las demás líneas de ayuda se añaden a mano.",
+        "windows": "El 119 (ambulancia) y el 110 (policía), números de emergencia de Japón, aparecen siempre. Las demás líneas de ayuda se añaden a mano.",
         "steps": "Un paso por línea. Se muestran en orden, desde arriba.",
         "plan": "Un paso por línea. Se muestran después de «Cuando el semáforo está en amarillo».",
         "yellow": "Cuando todavía no hay peligro, pero sí cansancio. Una forma de descansar y un solo pequeño paso."
@@ -668,6 +670,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Número de teléfono",
       "addRow": "Añadir",
       "del": "Borrar",
+      "delAgain": "Tocar otra vez para borrar",
       "stepPh": "Un paso en una línea",
       "addStep": "Añadir un paso",
       "up": "Arriba",
@@ -832,6 +835,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Numero di telefono",
       "addRow": "Aggiungi",
       "del": "Elimina",
+      "delAgain": "Tocchi di nuovo per eliminare",
       "stepPh": "Un passo per riga",
       "addStep": "Aggiungi un passo",
       "up": "Su",
@@ -987,7 +991,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "A forma de respirar que ajuda e as coisas que acalmam ao tocar, com as próprias palavras.",
         "signs": "Os sinais escolhidos pela própria pessoa:\"quando fico assim, é perigoso\".",
         "contacts": "Nome e número de telefone. Não é preciso escrever tudo.",
-        "windows": "O 119 (ambulância) e o 110 (polícia) aparecem sempre. Outras linhas de apoio podem ser adicionadas.",
+        "windows": "O 119 (ambulância) e o 110 (polícia), números de emergência do Japão, aparecem sempre. Outras linhas de apoio podem ser adicionadas.",
         "steps": "Um passo por linha. Aparecem um de cada vez, de cima para baixo.",
         "plan": "Um passo por linha. Aparecem depois de \"Quando a luz está amarela\".",
         "yellow": "Quando ainda não é perigoso, mas há cansaço. A forma de descansar e um pequeno passo, só um."
@@ -996,6 +1000,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Número de telefone",
       "addRow": "Adicionar",
       "del": "Apagar",
+      "delAgain": "Tocar outra vez para apagar",
       "stepPh": "Um passo por linha",
       "addStep": "Adicionar um passo",
       "up": "Para cima",
@@ -1099,8 +1104,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "btnNow": "Terug naar het hier en nu",
       "btnPlan": "Plan voor gevaarlijke momenten",
       "sos": {
-        "call119": "119 Ambulance (Japan)",
-        "call110": "110 Politie (Japan)",
+        "call119": "119 Ambulance",
+        "call110": "110 Politie",
         "call": "Bellen"
       },
       "agree": {
@@ -1151,7 +1156,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "De ademhaling die bij u past en de dingen die u rust geven als u ze aanraakt, in uw eigen woorden.",
         "signs": "De signalen waarvan u zelf hebt bepaald: \"als dit gebeurt, wordt het gevaarlijk\".",
         "contacts": "Naam en telefoonnummer. U hoeft niet alles in te vullen.",
-        "windows": "119 (ambulance) en 110 (politie) staan er altijd bij. Andere hulplijnen kunt u zelf toevoegen.",
+        "windows": "119 (ambulance) en 110 (politie), de alarmnummers in Japan, staan er altijd bij. Andere hulplijnen kunt u zelf toevoegen.",
         "steps": "Eén stap per regel. Ze verschijnen op volgorde, van boven naar beneden.",
         "plan": "Eén stap per regel. Ze verschijnen na \"Bij geel licht\".",
         "yellow": "Nog niet gevaarlijk, maar wel moe. Hoe u uitrust, en maar één kleine stap."
@@ -1160,6 +1165,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Telefoonnummer",
       "addRow": "Toevoegen",
       "del": "Wissen",
+      "delAgain": "Tik nog een keer om te wissen",
       "stepPh": "Eén stap per regel",
       "addStep": "Stap toevoegen",
       "up": "Omhoog",
@@ -1263,8 +1269,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "btnNow": "Tillbaka till här och nu",
       "btnPlan": "Plan för farliga stunder",
       "sos": {
-        "call119": "119 Ambulans (Japan)",
-        "call110": "110 Polis (Japan)",
+        "call119": "119 Ambulans",
+        "call110": "110 Polis",
         "call": "Ring"
       },
       "agree": {
@@ -1315,7 +1321,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "Andningen som fungerar för dig, och sakerna som lugnar dig när du rör vid dem. Med dina egna ord.",
         "signs": "De tecken som du själv har bestämt betyder \"nu börjar det bli farligt\".",
         "contacts": "Namn och telefonnummer. Du behöver inte fylla i allt.",
-        "windows": "119 (ambulans) och 110 (polis) visas alltid. Lägg till andra hjälplinjer själv.",
+        "windows": "119 (ambulans) och 110 (polis), larmnumren i Japan, visas alltid. Lägg till andra hjälplinjer själv.",
         "steps": "Ett steg per rad. De visas uppifrån, ett i taget.",
         "plan": "Ett steg per rad. De visas efter \"När ljuset är gult\".",
         "yellow": "Inte farligt än, men trött. Hur du vilar, och bara ett litet steg."
@@ -1324,6 +1330,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "Telefonnummer",
       "addRow": "Lägg till",
       "del": "Ta bort",
+      "delAgain": "Tryck igen för att ta bort",
       "stepPh": "Ett steg på en rad",
       "addStep": "Lägg till ett steg",
       "up": "Upp",
@@ -1479,7 +1486,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "나에게 맞는 호흡 방법이나, 만지면 차분해지는 것을, 나의 말로.",
         "signs": "'이렇게 되면 위험하다'고 스스로 정한 신호.",
         "contacts": "이름과 전화번호. 전부 쓰지 않아도 괜찮아요.",
-        "windows": "119(구급)·110(경찰)은 항상 나와요. 다른 창구는 직접 더해 주세요.",
+        "windows": "일본의 긴급 번호인 119(구급)·110(경찰)은 항상 나와요. 다른 창구는 직접 더해 주세요.",
         "steps": "한 단계를 한 줄로. 위에서부터 차례로 나와요.",
         "plan": "한 단계를 한 줄로. '노란 신호일 때' 다음에 나와요.",
         "yellow": "아직 위험하지는 않지만 지쳐 있을 때. 쉬는 방법과, 작은 한 걸음을 하나만."
@@ -1488,6 +1495,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "전화번호",
       "addRow": "추가",
       "del": "지우기",
+      "delAgain": "한 번 더 누르면 지워져요",
       "stepPh": "한 단계를 한 줄로",
       "addStep": "단계 추가",
       "up": "위로",
@@ -1652,6 +1660,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "电话号码",
       "addRow": "添加",
       "del": "删除",
+      "delAgain": "再点一次就会删除",
       "stepPh": "一个步骤写一行",
       "addStep": "添加步骤",
       "up": "向上",
@@ -1816,6 +1825,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "tel": "رقم الهاتف",
       "addRow": "إضافة",
       "del": "حذف",
+      "delAgain": "اضغط مرة أخرى للحذف",
       "stepPh": "خطوة واحدة في سطر واحد",
       "addStep": "إضافة خطوة",
       "up": "إلى الأعلى",

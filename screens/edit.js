@@ -39,12 +39,36 @@
     api.Tap.bind(close, function(){ sec = null; api.go('home'); });
     c.appendChild(close);
   }
+  /* 空白や改行だけの文は「書いていない」(表示の頁も作らない=lib.js と同じ判定) */
+  function has(s){ return window.ANSHIN_LIB.has(s); }
   function sectionFilled(d, id){
-    if(TEXT_KEYS.indexOf(id) >= 0) return !!d[id];
-    if(id === 'contacts' || id === 'windows') return d[id].some(function(r){ return (r.name && r.name.trim()) || (r.tel && r.tel.trim()); });
-    if(id === 'steps' || id === 'plan') return d[id].some(function(s){ return s.trim(); });
-    if(id === 'yellow') return !!(d.yellowRest || d.yellowStep);
+    if(TEXT_KEYS.indexOf(id) >= 0) return has(d[id]);
+    if(id === 'contacts' || id === 'windows') return d[id].some(function(r){ return has(r.name) || has(r.tel); });
+    if(id === 'steps' || id === 'plan') return d[id].some(has);
+    if(id === 'yellow') return has(d.yellowRest) || has(d.yellowStep);
     return false;
+  }
+
+  /* けす: 中身がある行は2段階(1回目でボタンが「もういちど おすと けします」に変わり、もう1回で消す。
+     4秒たつと元に戻る)。空の行は1回で消す */
+  function bindDelete(api, btn, isEmpty, doDelete){
+    var armed = false, timer = 0;
+    var label = btn.textContent, aria = btn.getAttribute('aria-label');
+    function disarm(){
+      armed = false;
+      btn.textContent = label;
+      if(aria == null) btn.removeAttribute('aria-label'); else btn.setAttribute('aria-label', aria);
+      btn.classList.remove('armed');
+    }
+    api.Tap.bind(btn, function(){
+      if(armed || isEmpty()){ clearTimeout(timer); armed = false; doDelete(); return; }
+      armed = true;
+      btn.textContent = T(api, 'delAgain');
+      btn.setAttribute('aria-label', T(api, 'delAgain'));
+      btn.classList.add('armed');
+      clearTimeout(timer);
+      timer = setTimeout(disarm, 4000);
+    });
   }
 
   /* ---- 項目の編集(共通の頭とお尻) ---- */
@@ -131,7 +155,7 @@
         grow.appendChild(nm); grow.appendChild(tl);
         li.appendChild(grow);
         var del = api.el('button', 'btn danger edit-del', T(api, 'del'));
-        api.Tap.bind(del, function(){
+        bindDelete(api, del, function(){ return !has(row.name) && !has(row.tel); }, function(){
           var removed = d[id].splice(idx, 1)[0];
           if(persist(api, d, function(){ d[id].splice(idx, 0, removed); })) draw();
         });
@@ -178,7 +202,7 @@
         api.Tap.bind(dn, function(){ if(idx < d[id].length - 1) swap(idx, idx + 1); });
         var del = api.el('button', 'btn danger edit-del', '×');
         del.setAttribute('aria-label', T(api, 'del'));
-        api.Tap.bind(del, function(){
+        bindDelete(api, del, function(){ return !has(d[id][idx]); }, function(){
           var removed = d[id].splice(idx, 1)[0];
           if(persist(api, d, function(){ d[id].splice(idx, 0, removed); })) draw();
         });

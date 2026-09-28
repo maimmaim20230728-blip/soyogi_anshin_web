@@ -1,6 +1,6 @@
 'use strict';
 /* ひとつずつ・そよぎ 画面共通の部品(画面ではない。home.js / edit.js が使う)
-   ・データの読み書き(1つのキー data.v1)・電話番号の正規化(もしもカード流用=数字と+だけ残す)
+   ・データの読み書き(1つのキー data.v1)・電話番号の正規化(もしもカード流用=数字と+だけ残す。全角は半角に・先頭の#*は残す・内線は切る)
    ・固定バー(119/110/登録した窓口を tel: で発信。どの画面にも出る)
    ・1画面1動作の表示(.ov 全画面・大きな文字・つぎ/まえ/とじる・進むたび振動)
    ・初回だけ出す免責(「わかった」で閉じる)
@@ -35,17 +35,29 @@
   /* 保存。false なら容量オーバー=呼び出し側で通知して取り消す */
   function saveData(api, d){ return api.save(DATA_KEY, d); }
 
-  /* ---- 電話番号: 数字と + だけ残す(もしもカードと同じ)。空なら null ---- */
+  /* ---- 電話番号: 数字と + だけ残す(もしもカードと同じ)。空なら null ----
+     ・全角の数字と記号(０-９＋＃＊)は半角にしてから数える(全角で書いた番号が黙って消えないように)
+     ・先頭の # と * は残す(#7119・#9110 などの短縮番号。消すと別の番号になる)
+     ・「内線」「ext」「x」と、途中の # * から後ろは切る(内線の数字を本番号に足さない)
+     ・数字が3つ未満なら null */
   function normTel(s){
-    var t = String(s == null ? '' : s).replace(/[^\d+]/g, '');
-    return t.length >= 3 ? t : null;
+    var t = String(s == null ? '' : s).replace(/[０-９＋＃＊]/g, function(c){ return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); });
+    t = t.split(/内線|ext|[xXｘＸ]/i)[0];
+    var m = /^[^\d+#*]*([#*])/.exec(t);
+    var lead = m ? m[1] : '';
+    if(m) t = t.slice(m[0].length);
+    var body = t.split(/[#*]/)[0].replace(/[^\d+]/g, '');
+    if(body.replace(/\D/g, '').length < 3) return null;
+    return lead + body;
   }
+  /* tel: の URI では # を %23 にする(そのままだと # 以降が捨てられる) */
+  function telHref(tel){ return 'tel:' + String(tel).replace(/#/g, '%23'); }
 
   /* ---- 発信ボタン(a[href=tel:]。ネイティブの遷移に任せる=JSの click は使わない) ---- */
   function callLink(api, label, tel, cls){
     var a = document.createElement('a');
     a.className = cls || 'sos-btn';
-    a.href = 'tel:' + tel;
+    a.href = telHref(tel);
     a.textContent = label;
     a.setAttribute('aria-label', label);
     return a;
@@ -59,7 +71,7 @@
     ];
     (d.windows || []).forEach(function(w){
       var t = normTel(w.tel);
-      if(t) out.push({ label:(w.name || t), tel:t });
+      if(t) out.push({ label:(has(w.name) ? w.name : t), tel:t });
     });
     return out;
   }
@@ -70,18 +82,33 @@
     bar.textContent = '';
     var d = loadData(api);
     callList(api, d).forEach(function(c){ bar.appendChild(callLink(api, c.label, c.tel, 'sos-btn')); });
+    /* 固定バーの高さを CSS 変数へ(トーストを固定バーより上に出すため。style.css の .toast) */
+    try{
+      var h = Math.ceil(bar.getBoundingClientRect().height);
+      if(h > 0) document.documentElement.style.setProperty('--sos-h', h + 'px');
+    }catch(_){}
   }
 
-  /* ---- 今日の日付(言語に合わせる。失敗したら素の形) ---- */
+  /* ---- 今日の日付(言語に合わせる。失敗したら素の形) ----
+     ja/zh は空白が無いので、語の途中(「28|日」「月|曜日」)で折れないよう、
+     数字と 年/月/日 の間・月と数字の間を WORD JOINER(U+2060)でつなぎ、「年」の後に ZERO WIDTH SPACE(U+200B)、曜日の前に空白を入れる
+     (表示の文は word-break:keep-all なので、折れるのは「2026年|9月28日|月曜日」の区切りだけ) */
   function todayText(api){
     var d = new Date();
     try{
       var tag = { ja:'ja-JP', en:'en-US', de:'de-DE', fr:'fr-FR', es:'es-ES', it:'it-IT', pt:'pt-PT', nl:'nl-NL', sv:'sv-SE', ko:'ko-KR', zh:'zh-CN', ar:'ar' }[api.lang] || 'ja-JP';
-      return d.toLocaleDateString(tag, { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+      var s = d.toLocaleDateString(tag, { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+      if(api.lang === 'ja' || api.lang === 'zh'){
+        var m = /^(.*?日)\s*(.+)$/.exec(s);
+        if(m) s = m[1].replace(/(\d)(?=[年月日])/g, '$1\u2060').replace(/月(?=\d)/g, '月\u2060').replace(/年/, '年\u200B') + ' ' + m[2];
+      }
+      return s;
     }catch(_){
       return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate();
     }
   }
+  /* 空白や改行だけの文は「書いていない」とみなす */
+  function has(s){ return !!(s && String(s).trim()); }
 
   /* ---- 表示するページの組み立て(空の項目は飛ばす) ----
      page = { label, text, calls:[{label,tel}] } */
@@ -89,29 +116,32 @@
     var T = function(k){ return api.T('screen.home.player.' + k); };
     var p = [];
     p.push({ label:T('today'), text:todayText(api) });
-    if(d.place) p.push({ label:T('place'), text:d.place });
-    d.steps.forEach(function(s){ if(s.trim()) p.push({ text:s }); });
-    if(d.calm) p.push({ label:T('calm'), text:d.calm });
-    if(d.words) p.push({ label:T('words'), text:d.words });
+    if(has(d.place)) p.push({ label:T('place'), text:d.place });
+    d.steps.forEach(function(s){ if(has(s)) p.push({ text:s }); });
+    if(has(d.calm)) p.push({ label:T('calm'), text:d.calm });
+    if(has(d.words)) p.push({ label:T('words'), text:d.words });
     p.push({ text:T('end'), calls:callList(api, d) });
     return p;
   }
   function pagesPlan(api, d){
     var T = function(k){ return api.T('screen.home.player.' + k); };
     var p = [];
-    if(d.yellowRest || d.yellowStep){
-      if(d.yellowRest) p.push({ label:T('yellow') + ' / ' + T('yellowRest'), text:d.yellowRest });
-      if(d.yellowStep) p.push({ label:T('yellow') + ' / ' + T('yellowStep'), text:d.yellowStep });
-    }
-    if(d.signs) p.push({ label:T('signs'), text:d.signs });
-    d.plan.forEach(function(s){ if(s.trim()) p.push({ text:s }); });
-    /* れんらくできる ひと: なまえ か でんわ が書いてある行だけ(空の行だけなら頁を作らない) */
-    var cs = [];
-    var people = d.contacts.filter(function(c){ return (c.name && c.name.trim()) || normTel(c.tel); });
-    people.forEach(function(c){ var t = normTel(c.tel); if(t) cs.push({ label:(c.name || t), tel:t }); });
-    if(people.length) p.push({ label:T('contacts'), text:people.map(function(c){ return c.name || c.tel; }).join('\n'), calls:cs });
+    if(has(d.yellowRest)) p.push({ label:T('yellow') + ' / ' + T('yellowRest'), text:d.yellowRest });
+    if(has(d.yellowStep)) p.push({ label:T('yellow') + ' / ' + T('yellowStep'), text:d.yellowStep });
+    if(has(d.signs)) p.push({ label:T('signs'), text:d.signs });
+    d.plan.forEach(function(s){ if(has(s)) p.push({ text:s }); });
+    /* れんらくできる ひと: なまえ か でんわ が書いてある行だけ(空の行だけなら頁を作らない)
+       電話がある人は発信ボタン(名前入り)だけ。電話が無い人だけ名前を文字で出す(同じ名前を2回並べない=頁が短くなる) */
+    var cs = [], names = [];
+    var people = d.contacts.filter(function(c){ return has(c.name) || normTel(c.tel); });
+    people.forEach(function(c){
+      var t = normTel(c.tel);
+      if(t) cs.push({ label:(has(c.name) ? c.name : t), tel:t });
+      else names.push(c.name);
+    });
+    if(people.length) p.push({ label:T('contacts'), text:names.join('\n'), calls:cs });
     p.push({ label:T('windows'), text:'', calls:callList(api, d) });
-    if(d.words) p.push({ label:T('words'), text:d.words });
+    if(has(d.words)) p.push({ label:T('words'), text:d.words });
     return p;
   }
 
@@ -130,7 +160,11 @@
 
     var title = api.el('div', 'pl-title', T(kind === 'plan' ? 'screen.home.player.planTitle' : 'screen.home.player.nowTitle'));
     ov.appendChild(title);
+    /* pl-body = スクロールする入れ物。中身は pl-inner に入れて上下の margin:auto で真ん中に置く
+       (中身が画面より高いときは上から並んでスクロールできる。justify-content:center だと頭が上に切れて戻れない) */
     var body = api.el('div', 'pl-body');
+    var inner = api.el('div', 'pl-inner');
+    body.appendChild(inner);
     ov.appendChild(body);
 
     var nav = api.el('div', 'pl-nav');
@@ -141,22 +175,22 @@
     ov.appendChild(nav);
 
     function draw(){
-      body.textContent = '';
+      inner.textContent = '';
       var pg = pages[i];
-      if(!pg){ body.appendChild(api.el('p', 'step-text', T('screen.home.player.empty'))); return; }
-      if(pg.label) body.appendChild(api.el('div', 'pl-label', pg.label));
-      if(pg.text) body.appendChild(api.el('div', 'step-text', pg.text));
+      if(!pg){ inner.appendChild(api.el('p', 'step-text', T('screen.home.player.empty'))); return; }
+      if(pg.label) inner.appendChild(api.el('div', 'pl-label', pg.label));
+      if(pg.text) inner.appendChild(api.el('div', 'step-text', pg.text));
       if(pg.calls && pg.calls.length){
         var row = api.el('div', 'pl-calls');
         pg.calls.forEach(function(c){ row.appendChild(callLink(api, c.label, c.tel, 'call-btn')); });
-        body.appendChild(row);
+        inner.appendChild(row);
       }
       var cnt = api.el('div', 'pl-count', T('screen.home.player.pageOf').replace('{n}', String(i + 1)).replace('{m}', String(pages.length)));
       cnt.setAttribute('dir', 'ltr');   // ar(RTL)でも「1 / 3」の並びを反転させない(数字は反転しない取り決め)
-      body.appendChild(cnt);
+      inner.appendChild(cnt);
       bPrev.classList.toggle('hidden', i <= 0);
       bNext.classList.toggle('hidden', i >= pages.length - 1);
-      try{ ov.scrollTop = 0; }catch(_){}
+      try{ ov.scrollTop = 0; body.scrollTop = 0; }catch(_){}
     }
     function close(){ if(ov.parentNode) ov.parentNode.removeChild(ov); }
     api.Tap.bind(bNext, function(){ if(i < pages.length - 1){ i++; api.vibrate(40); draw(); } });
@@ -186,7 +220,7 @@
 
   window.ANSHIN_LIB = {
     DATA_KEY: DATA_KEY, AGREE_KEY: AGREE_KEY,
-    blank: blank, loadData: loadData, saveData: saveData, normTel: normTel,
+    blank: blank, loadData: loadData, saveData: saveData, normTel: normTel, telHref: telHref, has: has, todayText: todayText,
     renderSos: renderSos, openPlayer: openPlayer, hasAgreed: hasAgreed, openAgree: openAgree,
     pagesNow: pagesNow, pagesPlan: pagesPlan
   };
