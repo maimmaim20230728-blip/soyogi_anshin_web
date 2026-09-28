@@ -1,5 +1,5 @@
 'use strict';
-/* 画面: とうろくの へや(連打で開く部屋の奥。ナビには置かない・リロードで閉じる)
+/* 画面: とうろくの へや(連打で開く部屋の奥。ナビには置かない・アプリを離れると閉じる(画面が隠れたら入口に戻してホームへ)・リロードでも閉じる)
    ・ホームのアプリ名5連打 → api.go('edit')。とじる/アプリ名タップ でホームへ
    ・入口(項目の一覧) → 項目ごとの編集(1画面1項目)。書いた瞬間に端末内へ保存(容量オーバーは通知して取り消し)
    ・項目: ばしょ/じぶんへの ことば/こきゅう・さわる もの/あぶない サイン/れんらくできる ひと/まどぐち/
@@ -8,8 +8,23 @@
   var TEXT_KEYS = ['place','words','calm','signs'];
   var SECTIONS = ['place','words','calm','signs','contacts','windows','steps','plan','yellow'];
   var sec = null;   // null=入口。編集中の項目id
+  var lastApi = null;   // 最後に描いたときの api(画面が隠れたときにホームへ戻すため)
 
   function T(api, k){ return api.T('screen.edit.' + k); }
+
+  /* アプリを離れたら部屋を閉じる(anshin-12)。Play版はリロードが起きないので、ホームボタン・電話・ほかのアプリへ移って
+     画面が隠れた(visibilitychange で hidden)ときに、部屋だけ入口に戻してホームにする。
+     表示の頁(.ov-player)は電話のあと続きを見られるよう閉じない。Web版もタブを離れると閉じる */
+  function closeOnHide(){
+    var hidden = (document.visibilityState === 'hidden') || document.hidden === true;
+    if(!hidden) return false;
+    var scr = document.getElementById('scr-edit');
+    if(!scr || scr.classList.contains('hidden')) return false;
+    sec = null;
+    if(lastApi) lastApi.go('home');
+    return true;
+  }
+  if(typeof document !== 'undefined' && document.addEventListener) document.addEventListener('visibilitychange', closeOnHide);
 
   /* 保存(失敗=容量オーバーなら通知して元に戻す) */
   function persist(api, d, undo){
@@ -223,6 +238,7 @@
 
   window.SCREENS.register('edit', {
     render: function(c, api){
+      lastApi = api;
       window.ANSHIN_LIB.renderSos(api);
       if(!sec) return renderHub(c, api);
       if(TEXT_KEYS.indexOf(sec) >= 0) return renderText(c, api, sec);
@@ -232,6 +248,8 @@
       sec = null; renderHub(c, api);
     },
     /* 部屋を開き直すときは入口から(home.js が呼ぶ) */
-    reset: function(){ sec = null; }
+    reset: function(){ sec = null; },
+    /* 画面が隠れたときの処理(検査用に外から呼べるようにしておく。閉じたら true) */
+    onHidden: closeOnHide
   });
 })();

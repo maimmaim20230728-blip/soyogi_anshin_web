@@ -2,7 +2,7 @@
 /* ひとつずつ・そよぎ 画面共通の部品(画面ではない。home.js / edit.js が使う)
    ・データの読み書き(1つのキー data.v1)・電話番号の正規化(もしもカード流用=数字と+だけ残す。全角は半角に・先頭の#*は残す・内線は切る)
    ・固定バー(119/110/登録した窓口を tel: で発信。どの画面にも出る)
-   ・1画面1動作の表示(.ov 全画面・大きな文字・つぎ/まえ/とじる・進むたび振動)
+   ・1画面1動作の表示(.ov 全画面・大きな文字・つぎ/まえ/とじる・進むたび振動・題名の行の端に × とじる)
    ・初回だけ出す免責(「わかった」で閉じる)
    ・window.ANSHIN_LIB として公開。click禁止(api.Tap.bind)。 */
 (function(){
@@ -158,8 +158,16 @@
     callList(api, d).forEach(function(c){ top.appendChild(callLink(api, c.label, c.tel, 'sos-btn')); });
     ov.appendChild(top);
 
+    /* 題名の行: 題名 + 端に「× とじる」(ヘッダーと同じ退出処理。表示はヘッダーを覆うため・anshin-13)。
+       119/110 の並びには入れない(並びが狭くなって 119/110 が隠れないように)。ar(RTL)は左端 */
+    var head = api.el('div', 'pl-head');
     var title = api.el('div', 'pl-title', T(kind === 'plan' ? 'screen.home.player.planTitle' : 'screen.home.player.nowTitle'));
-    ov.appendChild(title);
+    head.appendChild(title);
+    var bExit = api.el('button', 'btn pl-exit', T('app.exit'));
+    bExit.type = 'button';
+    api.Tap.bind(bExit, function(){ if(api.exit) api.exit(); }, { silent:true });
+    head.appendChild(bExit);
+    ov.appendChild(head);
     /* pl-body = スクロールする入れ物。中身は pl-inner に入れて上下の margin:auto で真ん中に置く
        (中身が画面より高いときは上から並んでスクロールできる。justify-content:center だと頭が上に切れて戻れない) */
     var body = api.el('div', 'pl-body');

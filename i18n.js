@@ -38,6 +38,7 @@ var ja = {
     bkHint:'あたらしい スマホに うつるときは、「かきだす」で ファイルを ほぞんして、あたらしい スマホで「よみこむ」を おしてください。',
     bkExport:'かきだす', bkImport:'よみこむ',
     exported:'かきだしました ✓', imported:'よみこみました ✓', importFail:'よみこめませんでした',
+    importConfirm:'いまの ないようは、ファイルの ないように おきかわります。よみこみますか?',
     note:'書いたことは すべて この端末の中だけに ほぞんされます。どこにも 送られません。',
     privacy:'プライバシーポリシー',
     credit:'アプリ開発：介護と支援の相談どころ そよぎ'
@@ -72,7 +73,7 @@ var ja = {
     },
     edit: {
       title:'とうろく の へや',
-      hint:'ここは アプリの名前を 5回 おしたときだけ ひらきます。画面を よみこみ直すと とじます(書いたものは のこります)。',
+      hint:'ここは アプリの名前を 5回 おしたときだけ ひらきます。アプリを はなれると とじます(書いたものは のこります)。',
       close:'とじる', back:'もどる',
       sections: {
         place:'いまいる ばしょ', words:'じぶんへの ことば', calm:'きく こきゅう・さわる もの', signs:'あぶない サイン',
@@ -127,6 +128,7 @@ var en = {
     bkHint:'When you move to a new phone, tap "Export" to save a file, then tap "Import" on the new phone.',
     bkExport:'Export', bkImport:'Import',
     exported:'Exported ✓', imported:'Imported ✓', importFail:'Could not import',
+    importConfirm:"Your current entries will be replaced with the file's contents. Import it?",
     note:'Everything you write is stored only on this device. Nothing is sent anywhere.',
     privacy:'Privacy policy',
     credit:'Developed by SOYOGI, a care and support consultation service'
@@ -158,7 +160,7 @@ var en = {
     },
     edit: {
       title:'Registration room',
-      hint:'This room opens only when you tap the app name 5 times. Reloading the page closes it (what you wrote stays).',
+      hint:'This room opens only when you tap the app name 5 times. It closes when you leave the app (what you wrote stays).',
       close:'Close', back:'Back',
       sections: {
         place:'The place I am in', words:'Words to myself', calm:'Breathing and things to touch', signs:'My warning signs',
@@ -269,6 +271,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportiert ✓",
     "imported": "Importiert ✓",
     "importFail": "Konnte nicht importiert werden",
+    "importConfirm": "Ihre aktuellen Einträge werden durch den Inhalt der Datei ersetzt. Jetzt importieren?",
     "note": "Alles, was Sie schreiben, bleibt nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.",
     "privacy": "Datenschutzerklärung",
     "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung"
@@ -311,7 +314,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Raum zum Eintragen",
-      "hint": "Dieser Raum öffnet sich nur, wenn Sie 5-mal auf den App-Namen tippen. Beim Neuladen der Seite schließt er sich (was Sie geschrieben haben, bleibt erhalten).",
+      "hint": "Dieser Raum öffnet sich nur, wenn Sie 5-mal auf den App-Namen tippen. Wenn Sie die App verlassen, schließt er sich (was Sie geschrieben haben, bleibt erhalten).",
       "close": "Schließen",
       "back": "Zurück",
       "sections": {
@@ -434,6 +437,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exporté ✓",
     "imported": "Importé ✓",
     "importFail": "Impossible d'importer",
+    "importConfirm": "Vos contenus actuels seront remplacés par le contenu du fichier. Voulez-vous importer ?",
     "note": "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé nulle part.",
     "privacy": "Politique de confidentialité",
     "credit": "Application développée par SOYOGI, lieu de conseil pour les soins et le soutien"
@@ -476,7 +480,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Espace d'écriture",
-      "hint": "Cet espace s'ouvre seulement quand vous appuyez 5 fois sur le nom de l'application. Recharger la page le ferme (ce que vous avez écrit reste).",
+      "hint": "Cet espace s'ouvre seulement quand vous appuyez 5 fois sur le nom de l'application. Il se ferme quand vous quittez l'application (ce que vous avez écrit reste).",
       "close": "Fermer",
       "back": "Retour",
       "sections": {
@@ -599,6 +603,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportado ✓",
     "imported": "Importado ✓",
     "importFail": "No se pudo importar",
+    "importConfirm": "Lo escrito ahora se reemplazará por el contenido del archivo. ¿Importar?",
     "note": "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.",
     "privacy": "Política de privacidad",
     "credit": "Desarrollo de la aplicación: SOYOGI, espacio de consulta sobre cuidados y apoyo"
@@ -641,7 +646,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Sala de registro",
-      "hint": "Esta sala se abre solo al tocar 5 veces el nombre de la aplicación. Al recargar la pantalla se cierra (lo escrito se conserva).",
+      "hint": "Esta sala se abre solo al tocar 5 veces el nombre de la aplicación. Al salir de la aplicación se cierra (lo escrito se conserva).",
       "close": "Cerrar",
       "back": "Volver",
       "sections": {
@@ -764,6 +769,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Esportato ✓",
     "imported": "Importato ✓",
     "importFail": "Non è stato possibile importare",
+    "importConfirm": "I contenuti attuali verranno sostituiti da quelli del file. Importare?",
     "note": "Tutto ciò che scrive resta solo in questo dispositivo. Non viene inviato da nessuna parte.",
     "privacy": "Informativa sulla privacy",
     "credit": "App sviluppata da SOYOGI, sportello di consulenza per l'assistenza e il sostegno"
@@ -806,7 +812,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Stanza di registrazione",
-      "hint": "Questa stanza si apre solo toccando 5 volte il nome dell'app. Se ricarica la schermata, si chiude (ciò che ha scritto resta).",
+      "hint": "Questa stanza si apre solo toccando 5 volte il nome dell'app. Se esce dall'app, si chiude (ciò che ha scritto resta).",
       "close": "Chiudi",
       "back": "Indietro",
       "sections": {
@@ -929,6 +935,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exportado ✓",
     "imported": "Importado ✓",
     "importFail": "Não foi possível importar",
+    "importConfirm": "O conteúdo atual será substituído pelo conteúdo da cópia. Importar?",
     "note": "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado para fora.",
     "privacy": "Política de privacidade",
     "credit": "Desenvolvido por SOYOGI, espaço de aconselhamento sobre cuidados e apoio"
@@ -971,7 +978,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Sala de escrita",
-      "hint": "Esta sala abre apenas ao tocar 5 vezes no nome que aparece no topo. Ao recarregar a página, fecha (o que foi escrito fica guardado).",
+      "hint": "Esta sala abre apenas ao tocar 5 vezes no nome que aparece no topo. Ao sair da aplicação, fecha (o que foi escrito fica guardado).",
       "close": "Fechar",
       "back": "Voltar",
       "sections": {
@@ -1094,6 +1101,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Geëxporteerd ✓",
     "imported": "Geïmporteerd ✓",
     "importFail": "Importeren is niet gelukt",
+    "importConfirm": "Wat u nu hebt, wordt vervangen door de inhoud van het bestand. Wilt u importeren?",
     "note": "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd.",
     "privacy": "Privacybeleid",
     "credit": "App-ontwikkeling: SOYOGI, adviespunt voor zorg en ondersteuning"
@@ -1136,7 +1144,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Invoerruimte",
-      "hint": "Deze ruimte opent alleen als u 5 keer op de naam van de app tikt. Als u het scherm opnieuw laadt, sluit hij (wat u schreef, blijft bewaard).",
+      "hint": "Deze ruimte opent alleen als u 5 keer op de naam van de app tikt. Als u de app verlaat, sluit hij (wat u schreef, blijft bewaard).",
       "close": "Sluiten",
       "back": "Terug",
       "sections": {
@@ -1259,6 +1267,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "Exporterat ✓",
     "imported": "Importerat ✓",
     "importFail": "Kunde inte importera",
+    "importConfirm": "Det du har nu ersätts med innehållet i filen. Vill du importera?",
     "note": "Allt du skriver sparas bara på den här enheten. Inget skickas någonstans.",
     "privacy": "Integritetspolicy",
     "credit": "Apputveckling: SOYOGI, rådgivning för omsorg och stöd"
@@ -1301,7 +1310,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "Registreringsrummet",
-      "hint": "Det här rummet öppnas bara när du trycker på appens namn 5 gånger. Om sidan laddas om stängs det (det du skrivit finns kvar).",
+      "hint": "Det här rummet öppnas bara när du trycker på appens namn 5 gånger. När du lämnar appen stängs det (det du skrivit finns kvar).",
       "close": "Stäng",
       "back": "Tillbaka",
       "sections": {
@@ -1424,6 +1433,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "내보냈어요 ✓",
     "imported": "가져왔어요 ✓",
     "importFail": "가져오지 못했어요",
+    "importConfirm": "지금 내용은 파일의 내용으로 바뀌어요. 가져올까요?",
     "note": "쓴 내용은 모두 이 기기 안에만 저장돼요. 어디에도 보내지 않아요.",
     "privacy": "개인정보 처리방침",
     "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI"
@@ -1466,7 +1476,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "등록하는 방",
-      "hint": "이곳은 앱 이름을 5번 눌렀을 때만 열려요. 화면을 다시 불러오면 닫혀요(쓴 내용은 남아요).",
+      "hint": "이곳은 앱 이름을 5번 눌렀을 때만 열려요. 앱을 벗어나면 닫혀요(쓴 내용은 남아요).",
       "close": "닫기",
       "back": "뒤로",
       "sections": {
@@ -1589,6 +1599,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "已导出 ✓",
     "imported": "已导入 ✓",
     "importFail": "无法导入",
+    "importConfirm": "现在的内容会被文件里的内容替换。要导入吗?",
     "note": "写下的内容全部只保存在这台设备里，不会发送到任何地方。",
     "privacy": "隐私政策",
     "credit": "应用开发：照护与支援咨询处 SOYOGI"
@@ -1631,7 +1642,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "登记的房间",
-      "hint": "这里只有在点按应用名称 5 次时才会打开。重新加载画面后会关闭(写下的内容会保留)。",
+      "hint": "这里只有在点按应用名称 5 次时才会打开。离开应用后会关闭(写下的内容会保留)。",
       "close": "关闭",
       "back": "返回",
       "sections": {
@@ -1754,6 +1765,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "exported": "تم التصدير ✓",
     "imported": "تم الاستيراد ✓",
     "importFail": "تعذّر الاستيراد",
+    "importConfirm": "سيُستبدل المحتوى الحالي بمحتوى الملف. هل تريد الاستيراد؟",
     "note": "كل ما يُكتب هنا يُحفظ في هذا الجهاز فقط. ولا يُرسل إلى أي مكان.",
     "privacy": "سياسة الخصوصية",
     "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات للرعاية والدعم"
@@ -1796,7 +1808,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     },
     "edit": {
       "title": "غرفة التسجيل",
-      "hint": "تُفتح هذه الغرفة فقط عند الضغط على اسم التطبيق 5 مرات. وتُغلق عند إعادة تحميل الشاشة (ما كتبته يبقى محفوظًا).",
+      "hint": "تُفتح هذه الغرفة فقط عند الضغط على اسم التطبيق 5 مرات. وتُغلق عند مغادرة التطبيق (ما كتبته يبقى محفوظًا).",
       "close": "إغلاق",
       "back": "رجوع",
       "sections": {

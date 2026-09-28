@@ -4,12 +4,12 @@
    ・click禁止: 操作は全て Tap.bind(tap.js)。select / file input だけはネイティブイベント
    ・画面は screens/<id>.js が window.SCREENS.register('<id>', { render(container, api) }) で登録する
      (会話補助ノートと同じ取り決め。画面同士・シェルの内部状態は共有しない)
-   ・api = { T, el, pref, toast, go, Tap, Photo, load, save, remove, getExtra, setExtra, speak, stopSpeak, vibrate, lang, rtl, ver, appKey }
+   ・api = { T, el, pref, toast, go, Tap, Photo, load, save, remove, getExtra, setExtra, speak, stopSpeak, vibrate, lang, rtl, ver, appKey, exit }
    ・🔴 BUILDER: アプリ固有の処理は screens/*.js に書く。このファイルは共通部分なので最小限の変更にとどめ、
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.1';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.2';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_anshin';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'anshin.';
 var LS_PREF = LS + 'pref.v1';
@@ -41,7 +41,8 @@ function sanitizePref(p){
     fs:    [0,1,2].indexOf(p.fs) >= 0 ? p.fs : 0,
     theme: THEMES.indexOf(p.theme) >= 0 ? p.theme : DEFAULT_THEME,
     bgm:   BGMS.indexOf(p.bgm) >= 0 ? p.bgm : DEFAULT_BGM,
-    sound: (p.sound === undefined) ? true : !!p.sound,
+    /* タップ音: このアプリは既定 OFF(深夜にひとりで使う・見られる前提。anshin-21)。保存済みの設定はそのまま使う */
+    sound: (p.sound === undefined) ? false : !!p.sound,
     extra: (p.extra && typeof p.extra === 'object' && !Array.isArray(p.extra)) ? p.extra : {}   // 画面側の小さな設定(api.setExtra)
   };
 }
@@ -160,8 +161,11 @@ function el(tag, cls, txt){
 var NATIVE_TTS = (function(){
   try{
     var c = window.Capacitor;
-    if(c && typeof c.isNativePlatform === 'function' && c.isNativePlatform() && typeof c.registerPlugin === 'function'){
-      return c.registerPlugin('TextToSpeech');
+    if(c && typeof c.isNativePlatform === 'function' && c.isNativePlatform()){
+      /* 🔴 取得は Capacitor.Plugins.TextToSpeech(ネイティブが注入する)。registerPlugin は @capacitor/core の関数で WebView には無い(2026-09-29) */
+      var p = c.Plugins && c.Plugins.TextToSpeech;
+      if(p && typeof p.speak === 'function') return p;
+      if(typeof c.registerPlugin === 'function') return c.registerPlugin('TextToSpeech');
     }
   }catch(_){}
   return null;
@@ -228,7 +232,8 @@ function screenApi(){
     lang: pref.lang,
     rtl: RTL_LANGS.indexOf(pref.lang) >= 0,
     ver: VER,
-    appKey: APP_KEY
+    appKey: APP_KEY,
+    exit: function(){ quickExit(); }   // クイック退出(ヘッダーの × とじる と同じ処理。表示の上の段からも呼ぶ)
   };
 }
 function renderScreen(id){
@@ -276,23 +281,52 @@ function exportBackup(){
   setTimeout(function(){ URL.revokeObjectURL(a.href); }, 3000);
   toast(T('set.exported'));
 }
+/* よみこむ: 形を確かめてから、置きかえる前に確かめの窓(window.confirm。Play版の WebView はネイティブのダイアログ)を出す。
+   やめる=何も変えない。OK=丸ごと入れ替え(ファイルに無い このアプリのデータ(anshin.*)は消してから書く。ほかのアプリのキーは触らない) */
 function importBackup(e){
   var f = e.target.files && e.target.files[0];
   if(!f) return;
   var r = new FileReader();
   r.onload = function(){
+    var d;
     try{
-      var d = JSON.parse(r.result);
-      if(d.app !== APP_KEY) throw new Error('different app');
-      if(d.data && typeof d.data === 'object'){ for(var k in d.data){ saveJSON(LS + k, d.data[k]); } }
-      pref = sanitizePref(d.pref);
-      savePref();
-      applyAll(true);
-      toast(T('set.imported'));
-    }catch(err){ toast(T('set.importFail')); }
+      d = JSON.parse(r.result);
+      if(!d || d.app !== APP_KEY) throw new Error('different app');
+      if(!d.data || typeof d.data !== 'object' || Array.isArray(d.data)) throw new Error('bad data');
+    }catch(err){ toast(T('set.importFail')); return; }
+    var ok = false;
+    try{ ok = window.confirm(T('set.importConfirm')); }catch(_){ ok = false; }
+    if(!ok) return;
+    if(!replaceData(d.data)){ toast(T('set.importFail')); return; }
+    pref = sanitizePref(d.pref);
+    savePref();
+    applyAll(true);
+    toast(T('set.imported'));
   };
   r.readAsText(f);
   e.target.value = '';
+}
+/* このアプリのデータ(「anshin.」で始まり pref 以外)をファイルの中身に入れ替える。
+   pref はファイルの data に入っていても使わない(sanitizePref のホワイトリストだけを通す)。
+   書けなかったら(容量オーバー等)書いた分を消して元に戻し false */
+function replaceData(obj){
+  var old = {}, k, i;
+  try{
+    for(i = 0; i < localStorage.length; i++){
+      k = localStorage.key(i);
+      if(k && k.indexOf(LS) === 0 && k !== LS_PREF) old[k] = localStorage.getItem(k);
+    }
+  }catch(_){ return false; }
+  for(k in old) removeKey(k);
+  var okAll = true;
+  for(k in obj){
+    if(!Object.prototype.hasOwnProperty.call(obj, k) || LS + k === LS_PREF) continue;
+    if(!saveJSON(LS + k, obj[k])){ okAll = false; break; }
+  }
+  if(okAll) return true;
+  for(k in obj){ if(LS + k !== LS_PREF) removeKey(LS + k); }
+  for(k in old){ try{ localStorage.setItem(k, old[k]); }catch(_){} }
+  return false;
 }
 
 /* ---- トースト ---- */

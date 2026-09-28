@@ -242,6 +242,11 @@ body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
 .ov-player{ display:flex; flex-direction:column; padding-bottom:calc(20px + env(safe-area-inset-bottom)); }
 .pl-top{ display:flex; gap:8px; overflow-x:auto; flex-shrink:0; padding-bottom:6px; }
 .pl-title{ color:var(--sub); font-weight:700; font-size:.9em; margin:8px 0 0; text-align:center; flex-shrink:0; }
+/* 題名の行: 題名 + 端に「× とじる」(anshin-13)。119/110 の並びには入れない。
+   題名が長い言語は題名だけが折り返し、× は行の上の端に残る(ar は左上)。題名は1行のとき × と同じ高さの真ん中 */
+.pl-head{ display:flex; align-items:flex-start; gap:8px; flex-shrink:0; margin:4px 0 0; }
+.pl-head .pl-title{ flex:1 1 auto; min-width:0; margin:0; min-height:48px; display:flex; align-items:center; justify-content:center; overflow-wrap:anywhere; }
+.pl-exit{ flex:none; min-height:48px; min-width:44px; padding:0 10px; border-radius:12px; font-size:min(.95em, 19px); white-space:nowrap; }   /* 字はヘッダーの × とじる(19px)より大きくしない */
 .pl-body{ flex:1 1 auto; display:flex; flex-direction:column; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; }
 .pl-inner{ margin:auto 0; padding:4px 0; }
 .pl-body .step-text{ margin:16px 0; white-space:pre-wrap; word-break:keep-all; }   /* 分かち書きの空白で折り返す(語の途中で切らない。長い1語は overflow-wrap:anywhere で収める) */
@@ -285,6 +290,22 @@ body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
 body[data-theme="dark"] .btn.danger.armed{ background:#b3261e; border-color:#ef9a9a; color:#fff; }
 /* トースト: 下ナビ+固定バー(119/110)の上に出す(--tabbar-h は app.js、--sos-h は lib.js が実寸を入れる) */
 .toast{ bottom:calc(var(--tabbar-h, 70px) + var(--sos-h, 68px) + 10px); }
+/* 文字用の緑(--brand-ink)(2026-09-29 点検の直し・8本共通):
+   明るい3テーマの --brand は、白い字を載せても・白い地の上で字に使っても 4.5:1 に届かない(3.1〜4.2:1)。
+   白い字が乗る緑(ヘッダーの地・主ボタン・chip.on・わかった・発信ボタン)と、緑を文字色に使う所(下ナビの選択中・リンク・✓)は濃い緑にする。
+   枠・線・飾りは --brand のまま。くろは緑が明るいので --brand のまま(字は --on-brand の濃い色)。
+   塗りのボタンの枠は塗りと同じ色(枠だけ明るい緑の輪にしない) */
+:root{ --brand-ink:#237a52; }
+body[data-theme="aqua"]{ --brand-ink:#1f6f8f; }
+body[data-theme="white"]{ --brand-ink:#237a52; }
+body[data-theme="dark"]{ --brand-ink:var(--brand); }
+header#hd{ background:var(--brand-ink); }
+.btn.primary, .big-btn.primary, .chip.on{ background:var(--brand-ink); border-color:var(--brand-ink); }
+.ov-close{ background:var(--brand-ink); }
+.call-btn{ background:var(--brand-ink); color:var(--on-brand); }
+.nav-btn.active, .credit a, .edit-sec .edit-mark{ color:var(--brand-ink); }
+/* 入力欄の見本の文字: Chrome 既定(#757575)は 4.5:1 に届かないので --sub の色にする */
+input::placeholder, textarea::placeholder{ color:var(--sub); opacity:1; }
 
 /* ======== 写真の取り込みとトリミング(photo.js) ======== */
 .photo-ov{
