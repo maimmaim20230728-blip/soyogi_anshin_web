@@ -1,4 +1,4 @@
-/* 安心の手順(仮) 多言語テーブル(そよぎアプリ・キット v1・12言語)
+/* ひとつずつ・そよぎ 多言語テーブル(そよぎアプリ・キット v1・12言語)
    ・window.ANSHIN_I18N = { ja, en, de, fr, es, it, pt, nl, sv, ko, zh, ar }
    ・キー構造は全言語で完全一致(_check.js が ja を正として構造・配列要素数を機械照合)
    ・🔴 BUILDER: 文言は ja と en の両方に同じキーで足す。画面固有は screen.<画面id>.* に置く。
@@ -12,7 +12,7 @@
 
 /* ============ ja(正) ============ */
 var ja = {
-  app: { name:'安心の手順(仮)', tagline:'元気なときに決めた手順で、いまに戻る。', exit:'× とじる' },
+  app: { name:'ひとつずつ・そよぎ', short:'ひとつずつ', tagline:'元気なときに決めた手順で、いまに戻る。', exit:'× とじる' },
   nav: { home:'ホーム', set:'せってい', edit:'とうろく' },
   common: {
     ok:'OK', cancel:'やめる', save:'ほぞんする', del:'けす', back:'もどる', close:'とじる',
@@ -44,7 +44,7 @@ var ja = {
   },
   screen: {
     home: {
-      title:'安心の手順(仮)',
+      title:'ひとつずつ',
       btnNow:'いま ここに もどる',
       btnPlan:'あぶないときの けいかく',
       /* 固定バー(どの画面にも出る救急と窓口) */
@@ -101,7 +101,7 @@ var ja = {
 
 /* ============ en ============ */
 var en = {
-  app: { name:'Calm Steps - SOYOGI (draft)', tagline:'Come back to now, with the steps you decided when you were well.', exit:'× Close' },
+  app: { name:'One by One - SOYOGI', short:'One by One', tagline:'Come back to now, with the steps you decided when you were well.', exit:'× Close' },
   nav: { home:'Home', set:'Settings', edit:'Register' },
   common: {
     ok:'OK', cancel:'Cancel', save:'Save', del:'Delete', back:'Back', close:'Close',
@@ -133,7 +133,7 @@ var en = {
   },
   screen: {
     home: {
-      title:'Calm Steps - SOYOGI (draft)',
+      title:'One by One',
       btnNow:'Come back to here and now',
       btnPlan:'My plan for hard moments',
       sos: { call119:'119 Ambulance', call110:'110 Police', call:'Call' },
@@ -191,7 +191,8 @@ function mergeDeep(t, s){ for(var k in s){ if(s[k] && typeof s[k] === 'object' &
 /* ---- de: 翻訳 ---- */
 TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Sichere Schritte - SOYOGI (Entwurf)",
+    "name": "Eins nach dem anderen - SOYOGI",
+    "short": "Eins nach dem anderen",
     "tagline": "Zurück ins Jetzt, mit den Schritten, die Sie festgelegt haben, als es Ihnen gut ging.",
     "exit": "× Schließen"
   },
@@ -274,7 +275,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Sichere Schritte - SOYOGI (Entwurf)",
+      "title": "Eins nach dem anderen",
       "btnNow": "Zurück ins Hier und Jetzt",
       "btnPlan": "Mein Plan für gefährliche Momente",
       "sos": {
@@ -354,7 +355,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- fr: 翻訳 ---- */
 TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Étapes sereines - SOYOGI (provisoire)",
+    "name": "Un par un - SOYOGI",
+    "short": "Un par un",
     "tagline": "Revenir à l'instant présent, avec les étapes que vous avez décidées quand vous alliez bien.",
     "exit": "× Fermer"
   },
@@ -437,7 +439,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Étapes sereines - SOYOGI (provisoire)",
+      "title": "Un par un",
       "btnNow": "Revenir ici et maintenant",
       "btnPlan": "Mon plan pour les moments difficiles",
       "sos": {
@@ -517,7 +519,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- es: 翻訳 ---- */
 TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Pasos de calma - SOYOGI (borrador)",
+    "name": "Uno a uno - SOYOGI",
+    "short": "Uno a uno",
     "tagline": "Volver al ahora, con los pasos decididos en un momento de calma.",
     "exit": "× Cerrar"
   },
@@ -600,7 +603,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Pasos de calma - SOYOGI (borrador)",
+      "title": "Uno a uno",
       "btnNow": "Volver al aquí y ahora",
       "btnPlan": "Plan para los momentos de peligro",
       "sos": {
@@ -680,7 +683,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- it: 翻訳 ---- */
 TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Passi sereni - SOYOGI (bozza)",
+    "name": "Uno alla volta - SOYOGI",
+    "short": "Uno alla volta",
     "tagline": "Tornare al qui e ora, con i passi decisi quando stava bene.",
     "exit": "× Chiudi"
   },
@@ -763,7 +767,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Passi sereni - SOYOGI (bozza)",
+      "title": "Uno alla volta",
       "btnNow": "Tornare al qui e ora",
       "btnPlan": "Piano per i momenti difficili",
       "sos": {
@@ -843,7 +847,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- pt: 翻訳 ---- */
 TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Passos de Calma - SOYOGI (rascunho)",
+    "name": "Um de cada vez - SOYOGI",
+    "short": "Um de cada vez",
     "tagline": "Voltar ao agora, com os passos decididos quando estava bem.",
     "exit": "× Fechar"
   },
@@ -926,7 +931,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Passos de Calma - SOYOGI (rascunho)",
+      "title": "Um de cada vez",
       "btnNow": "Voltar ao aqui e agora",
       "btnPlan": "Plano para os momentos difíceis",
       "sos": {
@@ -1006,7 +1011,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- nl: 翻訳 ---- */
 TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Stappen naar rust - SOYOGI (concept)",
+    "name": "Eén voor één - SOYOGI",
+    "short": "Eén voor één",
     "tagline": "Terug naar nu, met de stappen die u koos toen het goed ging.",
     "exit": "× Sluiten"
   },
@@ -1089,7 +1095,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Stappen naar rust - SOYOGI (concept)",
+      "title": "Eén voor één",
       "btnNow": "Terug naar het hier en nu",
       "btnPlan": "Plan voor gevaarlijke momenten",
       "sos": {
@@ -1169,7 +1175,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- sv: 翻訳 ---- */
 TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "Trygga steg - SOYOGI (utkast)",
+    "name": "En i taget - SOYOGI",
+    "short": "En i taget",
     "tagline": "Kom tillbaka till nuet, med stegen du bestämde när du mådde bra.",
     "exit": "× Stäng"
   },
@@ -1252,7 +1259,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "Trygga steg - SOYOGI (utkast)",
+      "title": "En i taget",
       "btnNow": "Tillbaka till här och nu",
       "btnPlan": "Plan för farliga stunder",
       "sos": {
@@ -1332,7 +1339,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- ko: 翻訳 ---- */
 TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "안심 순서 - SOYOGI (가칭)",
+    "name": "하나씩 - SOYOGI",
+    "short": "하나씩",
     "tagline": "마음이 괜찮을 때 정해 둔 순서로, 지금으로 돌아와요.",
     "exit": "× 닫기"
   },
@@ -1415,7 +1423,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "안심 순서 - SOYOGI (가칭)",
+      "title": "하나씩",
       "btnNow": "지금 여기로 돌아오기",
       "btnPlan": "위험할 때의 계획",
       "sos": {
@@ -1495,7 +1503,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- zh: 翻訳 ---- */
 TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "安心步骤 - SOYOGI (暂定)",
+    "name": "一个一个来 - SOYOGI",
+    "short": "一个一个来",
     "tagline": "用状态好的时候定下的步骤，回到此刻。",
     "exit": "× 关闭"
   },
@@ -1578,7 +1587,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "安心步骤 - SOYOGI (暂定)",
+      "title": "一个一个来",
       "btnNow": "回到此时此地",
       "btnPlan": "危险时的计划",
       "sos": {
@@ -1658,7 +1667,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
 /* ---- ar: 翻訳 ---- */
 TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
   "app": {
-    "name": "خطوات الطمأنينة - SOYOGI (مسودة)",
+    "name": "واحدة تلو الأخرى - SOYOGI",
+    "short": "واحدة تلو الأخرى",
     "tagline": "العودة إلى الآن، بالخطوات التي قررتها حين كنت بخير.",
     "exit": "× إغلاق"
   },
@@ -1741,7 +1751,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
   },
   "screen": {
     "home": {
-      "title": "خطوات الطمأنينة - SOYOGI (مسودة)",
+      "title": "واحدة تلو الأخرى",
       "btnNow": "العودة إلى هنا والآن",
       "btnPlan": "خطة وقت الخطر",
       "sos": {

@@ -1,9 +1,9 @@
 'use strict';
-/* 安心の手順(仮) Service Worker
+/* ひとつずつ・そよぎ Service Worker
    ・install時に実行ファイルをprecache / HTMLはnetwork-first / その他はcache-first
    ・開発/検証用ファイル(_始まり)はキャッシュしない
    🔴 更新のたびに CACHE 名を上げる。screens/ に画面を足したら ASSETS にも足す(_check.js が照合) */
-const CACHE = 'anshin-v5';
+const CACHE = 'anshin-v6';
 const ASSETS = [
   './',
   './index.html',
