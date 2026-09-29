@@ -75,6 +75,29 @@
     });
     return out;
   }
+  /* 119・110 が並びの幅に入りきらないときだけ、並び全体の字と余白を少し小さくする(.tight)。それでも入らなければ折り返す(.wrap)。
+     ar(RTL)は右から並ぶので左の端で見る。2026-09-29: 幅360px・文字 とても大きい で、en など8言語の表示の頁(.pl-top)と
+     de の固定バー(#sos-bar)で 110 が横スクロールの外に出ていた(登録した窓口は今までどおり横にスクロール) */
+  function fitCalls(box){
+    if(!box || !box.querySelectorAll || !box.getBoundingClientRect) return;
+    var btns = box.querySelectorAll('.sos-btn');   // 1つめ=119・2つめ=110
+    if(btns.length < 2) return;
+    box.classList.remove('tight', 'wrap');
+    function over(){
+      var b = box.getBoundingClientRect(), r = btns[1].getBoundingClientRect();
+      if(!b.width) return false;
+      return r.right > b.right + 0.5 || r.left < b.left - 0.5;
+    }
+    if(!over()) return;
+    box.classList.add('tight');
+    if(over()) box.classList.add('wrap');
+  }
+  if(typeof window !== 'undefined' && window.addEventListener){
+    window.addEventListener('resize', function(){
+      var ls = document.querySelectorAll('#sos-bar, .ov-player .pl-top');
+      for(var i = 0; i < ls.length; i++) fitCalls(ls[i]);
+    });
+  }
   /* 固定バーを描き直す(各画面の render から呼ぶ=言語切替・登録の変化に追随) */
   function renderSos(api){
     var bar = document.getElementById('sos-bar');
@@ -82,6 +105,7 @@
     bar.textContent = '';
     var d = loadData(api);
     callList(api, d).forEach(function(c){ bar.appendChild(callLink(api, c.label, c.tel, 'sos-btn')); });
+    fitCalls(bar);
     /* 固定バーの高さを CSS 変数へ(トーストを固定バーより上に出すため。style.css の .toast) */
     try{
       var h = Math.ceil(bar.getBoundingClientRect().height);
@@ -179,6 +203,8 @@
     var bPrev = api.el('button', 'btn pl-prev', T('common.prev'));
     var bNext = api.el('button', 'btn primary pl-next', T('common.next'));
     var bClose = api.el('button', 'btn pl-close', T('common.close'));
+    /* Android の戻るボタン(Play版)=この「とじる」と同じ(表示を閉じてホームへ。頁を1つ戻すのでも、「× とじる」の退出でもない・2026-09-29) */
+    bClose.setAttribute('data-back', '1');
     nav.appendChild(bPrev); nav.appendChild(bNext); nav.appendChild(bClose);
     ov.appendChild(nav);
 
@@ -206,6 +232,7 @@
     api.Tap.bind(bClose, close);
     draw();
     document.body.appendChild(ov);
+    fitCalls(top);   // 画面に出してから測る
     return ov;
   }
 
@@ -214,6 +241,8 @@
   function openAgree(api){
     var T = function(k){ return api.T('screen.home.agree.' + k); };
     var ov = api.el('div', 'ov ov-agree');
+    /* Android の戻るボタン(Play版)では閉じない(読まずに先へ進めてしまうので)。アプリを後ろに下げるだけ(2026-09-29) */
+    ov.setAttribute('data-noback', '1');
     ov.appendChild(api.el('h2', 'show-head', T('title')));
     ['body1','body2','body3','body4'].forEach(function(k){ ov.appendChild(api.el('p', 'agree-p', T(k))); });
     var ok = api.el('button', 'ov-close', T('ok'));

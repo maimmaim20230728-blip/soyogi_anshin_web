@@ -99,8 +99,10 @@
     api.Tap.bind(done, function(){ api.toast(T(api, 'saved')); sec = null; api.go('edit'); });
     c.appendChild(done);
   }
+  /* この部屋の欄は、書いた瞬間に保存する(input)。なので Android の戻るボタンの「書きかけ」の確かめには数えない(data-nodirty・2026-09-29) */
   function textarea(api, value, ph){
     var ta = document.createElement('textarea');
+    ta.setAttribute('data-nodirty', '1');
     ta.className = 'edit-ta';
     ta.value = value || '';
     ta.placeholder = ph || T(api, 'textPh');
@@ -110,6 +112,7 @@
   function input(api, value, ph, tel){
     var inp = document.createElement('input');
     inp.type = 'text';
+    inp.setAttribute('data-nodirty', '1');
     if(tel) inp.setAttribute('inputmode', 'tel');
     inp.value = value || '';
     inp.placeholder = ph || '';
@@ -246,6 +249,14 @@
       if(sec === 'contacts' || sec === 'windows') return renderRows(c, api, sec);
       if(sec === 'steps' || sec === 'plan') return renderLines(c, api, sec);
       sec = null; renderHub(c, api);
+    },
+    /* Android の戻るボタン(Play版・2026-09-29): 項目の編集中なら入口へ(「← もどる」と同じ。書いた分は保存済み・
+       「けす」を1回押して待っている行も消さない)。入口なら false=共通の動き(来た画面=ホームへ) */
+    back: function(api){
+      if(!sec) return false;
+      sec = null;
+      api.go('edit');
+      return true;
     },
     /* 部屋を開き直すときは入口から(home.js が呼ぶ) */
     reset: function(){ sec = null; },

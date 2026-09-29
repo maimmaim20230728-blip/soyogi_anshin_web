@@ -196,6 +196,17 @@ input[type="file"].hidden{ display:none; }
 /* tap.js の押下フィードバック */
 .pressing{ transform:scale(.97); filter:brightness(.92); }
 
+/* アプリの中の確かめの窓(app.js askBox・Play版だけ・2026-09-29)。重ねた画面・写真の切りとりより上、トーストより下 */
+.ov.ask-ov{
+  z-index:360; background:rgba(0,0,0,.55); display:flex; align-items:center; justify-content:center;
+  padding:calc(16px + env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+          calc(16px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+.ask-box{ background:var(--card); color:var(--ink); border:2px solid var(--line); border-radius:16px; padding:20px 16px 16px; width:min(100%, 460px); max-height:100%; overflow-y:auto; }
+.ask-msg{ font-size:1.15em; font-weight:700; line-height:1.55; margin:0 0 18px; word-break:keep-all; overflow-wrap:anywhere; white-space:pre-wrap; }   /* 分かち書きの空白で折る(語の途中で切らない) */
+.ask-row{ display:flex; flex-wrap:wrap; gap:10px; }
+.ask-row .btn{ flex:1 1 7em; min-height:56px; font-size:1.1em; }
+
 /* トースト */
 .toast{
   position:fixed; bottom:calc(96px + env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%);
@@ -236,6 +247,10 @@ header#hd{ gap:10px; }
   font-weight:800; font-size:.95em; text-decoration:none; white-space:nowrap;
 }
 body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
+/* 119・110 が入りきらないときだけ(lib.js fitCalls・2026-09-29)。とても大きい でも ふつうの字より大きいまま */
+#sos-bar.tight, .pl-top.tight{ gap:6px; }
+#sos-bar.tight .sos-btn, .pl-top.tight .sos-btn{ font-size:.8em; padding:0 8px; }
+#sos-bar.wrap, .pl-top.wrap{ flex-wrap:wrap; overflow-x:visible; }
 /* 1画面1動作の表示(.ov の上に)
    pl-top・pl-title・pl-nav は固定、pl-body だけがスクロールする。中身(pl-inner)は上下の margin:auto で真ん中に置き、
    画面より高いときは上から並ぶ(頭が上に切れない・下はボタンの裏に隠れない) */
