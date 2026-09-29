@@ -3,7 +3,7 @@
    ・データの読み書き(1つのキー data.v1)・電話番号の正規化(もしもカード流用=数字と+だけ残す。全角は半角に・先頭の#*は残す・内線は切る)
    ・固定バー(119/110/登録した窓口を tel: で発信。どの画面にも出る)
    ・1画面1動作の表示(.ov 全画面・大きな文字・つぎ/まえ/とじる・進むたび振動・題名の行の端に × とじる)
-   ・初回だけ出す免責(「わかった」で閉じる)
+   ・初回だけ出す免責(「わかった」で閉じる)と、はじめての つかいかた との順番(firstRun・2026-09-30)
    ・window.ANSHIN_LIB として公開。click禁止(api.Tap.bind)。 */
 (function(){
   var DATA_KEY = 'data.v1';
@@ -255,10 +255,36 @@
     return ov;
   }
 
+  /* ---- はじめての つかいかた(app.js openGuide)と免責の順番(2026-09-30) ----
+     ・案内(i18n の guide.*)に免責の4点(道具の説明・医療の代わりではない・119/110や窓口・アプリ名5回)を入れたので、
+       案内を読み終えたら免責も済んだ扱いにする(app.js が出す 'guide-done' で agreed.v1 = true)
+     ・案内をまだ読み終えていない = 案内だけを出す(免責は重ねない。前の版で同意済みの人にも案内は出る)
+     ・免責を出すのは、案内を読み終えたのに同意が無いとき(試しの種など)と、案内の文が無いときだけ(今までの形のまま)
+     ・案内はホームを描くたびに確かめる(app.js の初回の呼び出しに頼らない。openGuide は2つ目を開かない) */
+  var GUIDE_KEY = 'guide.v1';
+  function guideRead(api){ return api.load(GUIDE_KEY, false) === true; }
+  function firstRun(api){
+    if(!guideRead(api) && window.App && typeof window.App.guide === 'function'){
+      try{ window.App.guide(true); }catch(err){ console.error('guide error:', err); }
+    }
+    if(document.querySelector('.guide-ov')) return;
+    if(!hasAgreed(api) && !document.querySelector('.ov-agree')) openAgree(api);
+  }
+  if(typeof document !== 'undefined' && document.addEventListener){
+    document.addEventListener('guide-done', function(){
+      try{
+        var A = window.App;
+        if(A && typeof A.api === 'function') A.api().save(AGREE_KEY, true);
+        var ov = document.querySelector('.ov-agree');
+        if(ov && ov.parentNode) ov.parentNode.removeChild(ov);
+      }catch(err){ console.error('guide-done error:', err); }
+    });
+  }
+
   window.ANSHIN_LIB = {
-    DATA_KEY: DATA_KEY, AGREE_KEY: AGREE_KEY,
+    DATA_KEY: DATA_KEY, AGREE_KEY: AGREE_KEY, GUIDE_KEY: GUIDE_KEY,
     blank: blank, loadData: loadData, saveData: saveData, normTel: normTel, telHref: telHref, has: has, todayText: todayText,
-    renderSos: renderSos, openPlayer: openPlayer, hasAgreed: hasAgreed, openAgree: openAgree,
+    renderSos: renderSos, openPlayer: openPlayer, hasAgreed: hasAgreed, openAgree: openAgree, guideRead: guideRead, firstRun: firstRun,
     pagesNow: pagesNow, pagesPlan: pagesPlan
   };
 })();

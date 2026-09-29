@@ -305,6 +305,11 @@ body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
 body[data-theme="dark"] .btn.danger.armed{ background:#b3261e; border-color:#ef9a9a; color:#fff; }
 /* トースト: 下ナビ+固定バー(119/110)の上に出す(--tabbar-h は app.js、--sos-h は lib.js が実寸を入れる) */
 .toast{ bottom:calc(var(--tabbar-h, 70px) + var(--sos-h, 68px) + 10px); }
+/* はじめての つかいかた(2026-09-30)の あいだも、固定バー(119/110/窓口)は押せるように、案内より上に出す。
+   案内の「まえ/つぎ」の帯は固定バーの上に置く(下ナビは案内に隠れたまま) */
+body:has(.guide-ov) #sos-bar{ position:relative; z-index:352; }
+.ov.guide-ov .guide-row{ bottom:calc(var(--tabbar-h, 70px) + var(--sos-h, 68px)); padding-bottom:10px; }
+body .ov.guide-ov{ padding-bottom:calc(var(--tabbar-h, 70px) + var(--sos-h, 68px) + 120px); }   /* body をつけて、ファイルの最後の共通の節より強くする */
 /* 文字用の緑(--brand-ink)(2026-09-29 点検の直し・8本共通):
    明るい3テーマの --brand は、白い字を載せても・白い地の上で字に使っても 4.5:1 に届かない(3.1〜4.2:1)。
    白い字が乗る緑(ヘッダーの地・主ボタン・chip.on・わかった・発信ボタン)と、緑を文字色に使う所(下ナビの選択中・リンク・✓)は濃い緑にする。
@@ -341,3 +346,24 @@ input::placeholder, textarea::placeholder{ color:var(--sub); opacity:1; }
 .photo-zoom-row input[type="range"]{ flex:1; min-height:44px; accent-color:var(--brand); }
 .photo-row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; width:100%; max-width:420px; margin-top:12px; }
 .photo-file{ display:none; }
+
+/* はじめての つかいかた(app.js openGuide・2026-09-30)。🔴この節はファイルの最後に置く(patch_guide.js がここから最後までを写す)。
+   ほかの重ねた画面より上・確かめの窓より下。ボタンは下に固定した帯(地の色つき=長いページでも本文が透けない) */
+.ov.guide-ov{ z-index:350; padding-bottom:calc(128px + env(safe-area-inset-bottom)); }
+.guide-box{ width:min(100%, 560px); margin:0 auto; }
+.guide-top{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+.guide-title{ margin:0; font-weight:800; color:var(--brand-ink, var(--brand)); }
+.guide-step{ margin:0; color:var(--sub); font-weight:700; white-space:nowrap; unicode-bidi:isolate; }   /* 向きは app.js が dir で決める(ar で「8 / 1」にしない) */
+.guide-lang{ display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; margin:12px 0 0; }
+.guide-lang select{ min-height:44px; font-size:1em; font-family:inherit; border:2px solid var(--line); border-radius:10px; background:var(--card); color:var(--ink); padding:2px 8px; }
+.guide-h{ font-size:1.35em; line-height:1.45; margin:16px 0 12px; word-break:keep-all; overflow-wrap:anywhere; }
+.guide-p{ font-size:1.1em; line-height:1.85; margin:0; white-space:pre-line; word-break:keep-all; overflow-wrap:anywhere; }
+.guide-dots{ display:flex; justify-content:center; flex-wrap:wrap; gap:8px; margin:24px 0 0; }
+.guide-dot{ width:10px; height:10px; border-radius:50%; background:var(--line); }
+.guide-dot.on{ background:var(--brand); }
+.guide-row{
+  position:fixed; z-index:351; display:flex; gap:10px; left:0; right:0; bottom:0;
+  padding:10px max(16px, env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  background:var(--bg); border-top:1px solid var(--line);
+}
+.guide-row .btn{ flex:1 1 0; min-width:0; min-height:64px; font-size:1.15em; }

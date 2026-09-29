@@ -98,6 +98,33 @@ var ja = {
       yellowRest:'やすみかた(じぶんの ことばで)', yellowStep:'ちいさな いっぽ(ひとつだけ)',
       textPh:'ここに かきます', saved:'ほぞんしました ✓'
     }
+  },
+  /* はじめての つかいかた(app.js openGuide・初回に1回だけ・2026-09-30)。初回の免責「はじめに」の4点(道具の説明・医療の代わりではない・
+     119/110や窓口・アプリ名5回)をここに含める=読み終えたら免責も済んだ扱い(screens/lib.js)。とうろくの へやが隠れた入口なので
+     せっていから もう一度は ひらけない(GUIDE_AGAIN=false・10代の情報室と同じ)。heads と bodies は同じ数。
+     本文の「× とじる」は × と語の間を NBSP(U+00A0)でつないでいる(行の端で「×」だけが残らないように。12言語とも) */
+  guide: {
+    title:'つかいかた', step:'{n} / {m}', start:'はじめる', again:'もういちど 見る',
+    heads:[
+      'ひとつずつ・そよぎ へ ようこそ',
+      'とうろく の へやの ひらきかた',
+      'とうろく の へや',
+      'てじゅんを 書く',
+      'つらいときは ホームの ボタン',
+      'でんわの ボタン',
+      '書いたことは この端末の中だけ',
+      '見やすく する'
+    ],
+    bodies:[
+      'このアプリは、元気なときに じぶんで きめた手順を、つらいときに 1画面ずつ 出す道具です。\n医療の代わりでは ありません。\nあぶないときは、119(きゅうきゅう)・110(けいさつ)や 相談窓口に れんらくしてください。',
+      'てじゅんは、元気なときに 書いておきます。\nいちばん上の アプリの名前を 5回 つづけて おすと、「とうろく の へや」が ひらきます。\nへやに はいる ボタンは ありません。この案内は さいごまで 読むと もう 出ないので、ひらきかたを おぼえておいてください。',
+      'へやには、「いまいる ばしょ」「じぶんへの ことば」など、9つの 項目が あります。\n項目を おして 書くと、書いた そばから ほぞんされます。ぜんぶ 書かなくても だいじょうぶです。\n「できた」で 項目の 一覧に もどります。「とじる」を おすか、アプリを はなれると、へやは とじます。',
+      '「いま ここに もどる」と「あぶないときの けいかく」の てじゅんは、1行に ひとつずつ 書きます。\n「＋ てじゅんを ついか」で 行を ふやし、↑ ↓ で じゅんばんを かえます。\n「まどぐち」には、相談窓口の なまえと でんわばんごうを 書きます。',
+      'ホームには、「いま ここに もどる」と「あぶないときの けいかく」の 2つの ボタンが あります。\nおすと、へやで 書いた ことばが 1画面に ひとつずつ 出ます。\n「つぎ」「まえ」で すすみ、「とじる」で ホームに もどります。',
+      'あぶないときは、すぐに でんわ できます。\n画面の 下の「119 きゅうきゅう」「110 けいさつ」を おすと、電話の アプリが その番号で ひらきます。\n「まどぐち」に 書いた 窓口も ここに ならびます。てじゅんを 出している ときは、いちばん上に あります。',
+      '書いたことは すべて この端末の中だけに ほぞんされます。どこにも 送られません。\nスマホを かえるときは、「せってい」の「かきだす」で ファイルを ほぞんして、あたらしい スマホで「よみこむ」を おしてください。\nすぐに 画面を かえたい ときは、いちばん上の「× とじる」を おすと、Google の ページが ひらきます。',
+      '「せってい」で、「もじの大きさ」(ふつう・大きい・とても大きい)と「いろ」(みどり・みずいろ・しろ・くろ)を かえられます。\n「BGM」と「タップ音」も ここで かえられます。\nことばは、いちばん上の「Language」で えらべます。'
+    ]
   }
 };
 
@@ -186,6 +213,29 @@ var en = {
       yellowRest:'How I rest (in my own words)', yellowStep:'One small step (just one)',
       textPh:'Write here', saved:'Saved ✓'
     }
+  },
+  guide: {
+    title:'How to use', step:'{n} / {m}', start:'Start', again:'Show again',
+    heads:[
+      'Welcome to One by One - SOYOGI',
+      'How to open the Registration room',
+      'The Registration room',
+      'Writing your steps',
+      'In a hard moment, use the Home buttons',
+      'Call buttons',
+      'What you write stays on this device',
+      'Making it easier to see'
+    ],
+    bodies:[
+      'In hard moments, this app shows the steps you decided for yourself when you were well, one screen at a time.\nIt is not a substitute for medical care.\nIf you are in danger, call 119 (ambulance) or 110 (police) in Japan, or a helpline.',
+      'Write your steps while you are well.\nTap the app name at the top 5 times in a row to open the "Registration room".\nThere is no button for the room. This guide does not appear again once you have read it to the end, so please remember how to open the room.',
+      'The room has 9 items, such as "The place I am in" and "Words to myself".\nTap an item and write. It is saved as you type. You do not have to fill in everything.\n"Done" takes you back to the list of items. The room closes when you tap "Close" or leave the app.',
+      'Write the steps for "Come back to here and now" and "My plan for hard moments" one per line.\nUse "＋ Add a step" to add a line, and ↑ ↓ to change the order.\nUnder "Helplines", write the names and phone numbers of helplines.',
+      'Home has two buttons: "Come back to here and now" and "My plan for hard moments".\nTap one, and what you wrote in the room appears one screen at a time.\nMove with "Next" and "Previous", and tap "Close" to go back to Home.',
+      'In danger, you can call right away.\nTap "119 Ambulance" or "110 Police" at the bottom of the screen, and your phone app opens with that number.\nThe helplines you wrote under "Helplines" appear there too. While your steps are shown, these buttons are at the top.',
+      'Everything you write is stored only on this device. Nothing is sent anywhere.\nWhen you change phones, tap "Export" in "Settings" to save a file, then tap "Import" on the new phone.\nTo change the screen quickly, tap "× Close" at the top, and a Google page opens.',
+      'In "Settings" you can change the "Text size" (Normal, Large, Very large) and the "Color" (Green, Light blue, White, Black).\nYou can also change "Music" and "Tap sound" there.\nChoose your language with "Language" at the top.'
+    ]
   }
 };
 
@@ -356,6 +406,32 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Hier schreiben",
       "saved": "Gespeichert ✓"
     }
+  },
+  "guide": {
+    "title": "Anleitung",
+    "step": "{n} / {m}",
+    "start": "Starten",
+    "again": "Noch einmal ansehen",
+    "heads": [
+      "Willkommen bei Eins nach dem anderen - SOYOGI",
+      "So öffnen Sie den Raum zum Eintragen",
+      "Der Raum zum Eintragen",
+      "Schritte aufschreiben",
+      "In schweren Momenten: die Tasten auf der Startseite",
+      "Anruf-Tasten",
+      "Was Sie schreiben, bleibt auf diesem Gerät",
+      "Besser lesbar machen"
+    ],
+    "bodies": [
+      "Diese App zeigt in schweren Momenten, einen Bildschirm nach dem anderen, die Schritte, die Sie selbst festgelegt haben, als es Ihnen gut ging.\nSie ist kein Ersatz für medizinische Hilfe.\nWenn Sie in Gefahr sind, rufen Sie 119 (Rettungsdienst, Japan) oder 110 (Polizei, Japan) an oder wenden Sie sich an eine Beratungsstelle.",
+      "Schreiben Sie Ihre Schritte auf, solange es Ihnen gut geht.\nTippen Sie 5-mal hintereinander auf den App-Namen ganz oben, dann öffnet sich der „Raum zum Eintragen“.\nFür den Raum gibt es keine Taste. Diese Anleitung erscheint nicht mehr, wenn Sie sie bis zum Ende gelesen haben. Merken Sie sich bitte, wie sich der Raum öffnet.",
+      "Der Raum hat 9 Punkte, zum Beispiel „Wo ich gerade bin“ und „Worte an mich selbst“.\nTippen Sie auf einen Punkt und schreiben Sie. Alles wird schon beim Schreiben gespeichert. Sie müssen nicht alles ausfüllen.\nMit „Fertig“ kommen Sie zur Liste zurück. Der Raum schließt sich, wenn Sie auf „Schließen“ tippen oder die App verlassen.",
+      "Schreiben Sie die Schritte für „Zurück ins Hier und Jetzt“ und „Mein Plan für gefährliche Momente“ auf, einen Schritt pro Zeile.\nMit „＋ Schritt hinzufügen“ kommt eine Zeile dazu, mit ↑ ↓ ändern Sie die Reihenfolge.\nUnter „Anlaufstellen“ tragen Sie Namen und Telefonnummern von Beratungsstellen ein.",
+      "Auf der Startseite gibt es zwei Tasten: „Zurück ins Hier und Jetzt“ und „Mein Plan für gefährliche Momente“.\nWenn Sie darauf tippen, erscheint das, was Sie im Raum geschrieben haben, einen Bildschirm nach dem anderen.\nMit „Weiter“ und „Zurück“ blättern Sie, mit „Schließen“ kehren Sie zur Startseite zurück.",
+      "In Gefahr können Sie sofort anrufen.\nWenn Sie unten auf „119 Rettungsdienst“ oder „110 Polizei“ tippen, öffnet sich Ihre Telefon-App mit dieser Nummer.\nDie Stellen, die Sie unter „Anlaufstellen“ eingetragen haben, stehen dort auch. Während Ihre Schritte angezeigt werden, sind diese Tasten ganz oben.",
+      "Alles, was Sie schreiben, bleibt nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.\nWenn Sie das Smartphone wechseln, tippen Sie in den „Einstellungen“ auf „Exportieren“, um eine Datei zu speichern, und dann auf dem neuen Smartphone auf „Importieren“.\nWenn Sie den Bildschirm schnell wechseln möchten, tippen Sie oben auf „× Schließen“. Dann öffnet sich eine Seite von Google.",
+      "In den „Einstellungen“ können Sie die „Schriftgröße“ (Normal, Groß, Sehr groß) und die „Farbe“ (Grün, Hellblau, Weiß, Schwarz) ändern.\n„Musik“ und „Tippton“ lassen sich dort ebenfalls ändern.\nDie Sprache wählen Sie oben bei „Language“."
+    ]
   }
 });
 /* ---- /de ---- */
@@ -523,6 +599,32 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Écrivez ici",
       "saved": "Enregistré ✓"
     }
+  },
+  "guide": {
+    "title": "Mode d'emploi",
+    "step": "{n} / {m}",
+    "start": "Commencer",
+    "again": "Revoir",
+    "heads": [
+      "Bienvenue dans Un par un - SOYOGI",
+      "Ouvrir l'espace d'écriture",
+      "L'espace d'écriture",
+      "Écrire vos étapes",
+      "Dans un moment difficile, les boutons de l'accueil",
+      "Les boutons d'appel",
+      "Ce que vous écrivez reste sur cet appareil",
+      "Rendre l'affichage plus lisible"
+    ],
+    "bodies": [
+      "Cette application est un outil qui montre, dans les moments difficiles, un écran à la fois, les étapes que vous avez décidées vous-même quand vous alliez bien.\nElle ne remplace pas les soins médicaux.\nEn cas de danger, contactez le 119 (ambulance) ou le 110 (police) au Japon, ou un numéro d'aide.",
+      "Écrivez vos étapes quand vous allez bien.\nAppuyez 5 fois de suite sur le nom de l'application, tout en haut, et l'\"Espace d'écriture\" s'ouvre.\nAucun bouton ne mène à cet espace. Ce guide ne s'affiche plus une fois lu jusqu'au bout, alors retenez bien comment l'ouvrir.",
+      "Cet espace contient 9 rubriques, par exemple \"Là où je suis\" et \"Mes mots pour moi-même\".\nAppuyez sur une rubrique et écrivez. Tout est enregistré au fur et à mesure. Il n'est pas nécessaire de tout remplir.\n\"Terminé\" vous ramène à la liste. L'espace se ferme quand vous appuyez sur \"Fermer\" ou quand vous quittez l'application.",
+      "Écrivez les étapes de \"Revenir ici et maintenant\" et de \"Mon plan pour les moments difficiles\", une par ligne.\nAvec \"＋ Ajouter une étape\", vous ajoutez une ligne, et avec ↑ ↓ vous changez l'ordre.\nDans \"Numéros d'aide\", écrivez le nom et le numéro de téléphone des services d'aide.",
+      "L'accueil a deux boutons, \"Revenir ici et maintenant\" et \"Mon plan pour les moments difficiles\".\nQuand vous appuyez dessus, ce que vous avez écrit dans l'espace s'affiche un écran à la fois.\nAvancez avec \"Suivant\" et \"Précédent\", puis revenez à l'accueil avec \"Fermer\".",
+      "En cas de danger, vous pouvez appeler tout de suite.\nAppuyez sur \"119 Ambulance\" ou \"110 Police\" en bas de l'écran, et l'application Téléphone s'ouvre avec ce numéro.\nLes numéros écrits dans \"Numéros d'aide\" s'y affichent aussi. Quand vos étapes sont affichées, ces boutons sont en haut.",
+      "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé nulle part.\nPour passer à un nouveau téléphone, appuyez sur \"Exporter\" dans \"Réglages\" pour enregistrer un fichier, puis sur \"Importer\" sur le nouveau téléphone.\nPour changer vite d'écran, appuyez sur \"× Fermer\" en haut. Une page de Google s'ouvre.",
+      "Dans \"Réglages\", vous pouvez changer la \"Taille du texte\" (Normale, Grande, Très grande) et la \"Couleur\" (Vert, Bleu clair, Blanc, Noir).\nVous pouvez aussi y changer la \"Musique\" et le \"Son des touches\".\nChoisissez la langue avec \"Language\", tout en haut."
+    ]
   }
 });
 /* ---- /fr ---- */
@@ -690,6 +792,32 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Escribir aquí",
       "saved": "Guardado ✓"
     }
+  },
+  "guide": {
+    "title": "Cómo se usa",
+    "step": "{n} / {m}",
+    "start": "Empezar",
+    "again": "Ver de nuevo",
+    "heads": [
+      "Qué es Uno a uno - SOYOGI",
+      "Cómo abrir la sala de registro",
+      "La sala de registro",
+      "Escribir los pasos",
+      "En un momento difícil, los botones de Inicio",
+      "Botones para llamar",
+      "Lo escrito se queda en este dispositivo",
+      "Para ver mejor"
+    ],
+    "bodies": [
+      "Esta aplicación es una herramienta que muestra, en los momentos difíciles, una pantalla a la vez, los pasos que la propia persona decidió cuando se sentía bien.\nNo sustituye a la atención médica.\nEn caso de peligro, llamar al 119 (ambulancia, Japón), al 110 (policía, Japón) o a una línea de ayuda.",
+      "Los pasos se escriben en un momento en que uno se siente bien.\nAl tocar 5 veces seguidas el nombre de la aplicación, arriba del todo, se abre la «Sala de registro».\nNo hay ningún botón para entrar en la sala. Esta guía no vuelve a aparecer una vez leída hasta el final, así que conviene recordar cómo se abre.",
+      "La sala tiene 9 apartados, por ejemplo «El lugar donde estoy ahora» y «Palabras para mí».\nAl tocar un apartado y escribir, lo escrito se guarda al momento. No hace falta rellenarlo todo.\n«Listo» vuelve a la lista de apartados. La sala se cierra al tocar «Cerrar» o al salir de la aplicación.",
+      "Los pasos de «Volver al aquí y ahora» y del «Plan para los momentos de peligro» se escriben uno por línea.\nCon «＋ Añadir un paso» se añade una línea, y con ↑ ↓ se cambia el orden.\nEn «Líneas de ayuda» se escriben el nombre y el teléfono de los servicios de ayuda.",
+      "En Inicio hay dos botones, «Volver al aquí y ahora» y «Plan para los momentos de peligro».\nAl tocarlos, lo escrito en la sala aparece una pantalla a la vez.\nSe avanza con «Siguiente» y «Anterior», y con «Cerrar» se vuelve a Inicio.",
+      "En caso de peligro, se puede llamar enseguida.\nAl tocar «119 Ambulancia» o «110 Policía», abajo en la pantalla, se abre la aplicación de teléfono con ese número.\nLas líneas escritas en «Líneas de ayuda» también aparecen ahí. Mientras se muestran los pasos, estos botones están arriba.",
+      "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.\nAl cambiar a un teléfono nuevo, tocar «Exportar» en «Ajustes» para guardar un archivo y, en el teléfono nuevo, tocar «Importar».\nPara cambiar la pantalla enseguida, tocar «× Cerrar» arriba. Se abre una página de Google.",
+      "En «Ajustes» se pueden cambiar el «Tamaño de la letra» (Normal, Grande, Muy grande) y el «Color» (Verde, Azul claro, Blanco, Negro).\nAhí también se pueden cambiar la «Música» y el «Sonido al tocar».\nEl idioma se elige arriba, en «Language»."
+    ]
   }
 });
 /* ---- /es ---- */
@@ -857,6 +985,32 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Scriva qui",
       "saved": "Salvato ✓"
     }
+  },
+  "guide": {
+    "title": "Come si usa",
+    "step": "{n} / {m}",
+    "start": "Inizia",
+    "again": "Rivedi",
+    "heads": [
+      "Che cos'è Uno alla volta - SOYOGI",
+      "Come aprire la stanza di registrazione",
+      "La stanza di registrazione",
+      "Scrivere i passi",
+      "Nei momenti difficili, i pulsanti della Home",
+      "I pulsanti per chiamare",
+      "Ciò che scrive resta in questo dispositivo",
+      "Per vedere meglio"
+    ],
+    "bodies": [
+      "Questa app è uno strumento che mostra, nei momenti difficili e una schermata alla volta, i passi che ha deciso da sé quando stava bene.\nNon sostituisce le cure mediche.\nIn caso di pericolo, contatti il 119 (ambulanza) o il 110 (polizia), numeri del Giappone, oppure uno sportello di aiuto.",
+      "I passi si scrivono quando si sta bene.\nToccando 5 volte di seguito il nome dell'app in alto, si apre la \"Stanza di registrazione\".\nNon c'è nessun pulsante per entrare nella stanza. Questa guida non compare più dopo averla letta fino in fondo, quindi ricordi come si apre.",
+      "La stanza ha 9 voci, per esempio \"Il luogo in cui si trova ora\" e \"Parole per sé\".\nTocchi una voce e scriva. Ciò che scrive si salva subito. Non serve compilare tutto.\n\"Fatto\" riporta all'elenco delle voci. La stanza si chiude toccando \"Chiudi\" o uscendo dall'app.",
+      "Scriva i passi di \"Tornare al qui e ora\" e del \"Piano per i momenti difficili\" uno per riga.\nCon \"＋ Aggiungi un passo\" aggiunge una riga, con ↑ ↓ cambia l'ordine.\nIn \"Sportelli di aiuto\" scriva il nome e il numero di telefono degli sportelli.",
+      "Nella Home ci sono due pulsanti, \"Tornare al qui e ora\" e \"Piano per i momenti difficili\".\nToccandoli, ciò che ha scritto nella stanza compare una schermata alla volta.\nSi va avanti con \"Avanti\" e \"Precedente\", e con \"Chiudi\" si torna alla Home.",
+      "In caso di pericolo, può chiamare subito.\nToccando \"119 Ambulanza\" o \"110 Polizia\" in basso, si apre l'app del telefono con quel numero.\nAnche gli sportelli scritti in \"Sportelli di aiuto\" compaiono lì. Mentre i passi sono mostrati, questi pulsanti sono in alto.",
+      "Tutto ciò che scrive resta solo in questo dispositivo. Non viene inviato da nessuna parte.\nQuando passa a un nuovo telefono, tocchi \"Esporta\" in \"Impostazioni\" per salvare un file, poi tocchi \"Importa\" sul nuovo telefono.\nPer cambiare subito schermata, tocchi \"× Chiudi\" in alto. Si apre una pagina di Google.",
+      "In \"Impostazioni\" può cambiare la \"Dimensione del testo\" (Normale, Grande, Molto grande) e il \"Colore\" (Verde, Azzurro, Bianco, Nero).\nLì può cambiare anche \"Musica\" e \"Suono al tocco\".\nLa lingua si sceglie in alto, in \"Language\"."
+    ]
   }
 });
 /* ---- /it ---- */
@@ -1024,6 +1178,32 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Escrever aqui",
       "saved": "Guardado ✓"
     }
+  },
+  "guide": {
+    "title": "Como usar",
+    "step": "{n} / {m}",
+    "start": "Começar",
+    "again": "Ver de novo",
+    "heads": [
+      "O que é Um de cada vez - SOYOGI",
+      "Como abrir a sala de escrita",
+      "A sala de escrita",
+      "Escrever os passos",
+      "Nos momentos difíceis, os botões do Início",
+      "Botões para ligar",
+      "O que se escreve fica neste aparelho",
+      "Para ver melhor"
+    ],
+    "bodies": [
+      "Nos momentos difíceis, esta ferramenta mostra, um de cada vez, os passos decididos pela própria pessoa quando estava bem.\nNão substitui os cuidados médicos.\nEm caso de perigo, ligar para o 119 (ambulância), para o 110 (polícia) ou para uma linha de apoio. O 119 e o 110 são números do Japão.",
+      "Os passos escrevem-se num momento em que se está bem.\nAo tocar 5 vezes seguidas no nome que aparece no topo, abre-se a \"Sala de escrita\".\nNão há nenhum botão para entrar na sala. Este guia não volta a aparecer depois de lido até ao fim, por isso convém lembrar como se abre.",
+      "A sala tem 9 partes, por exemplo \"O lugar onde estou\" e \"Palavras para mim\".\nAo tocar numa parte e escrever, o que foi escrito fica logo guardado. Não é preciso preencher tudo.\n\"Feito\" volta à lista. A sala fecha ao tocar em \"Fechar\" ou ao sair da aplicação.",
+      "Os passos de \"Voltar ao aqui e agora\" e do \"Plano para os momentos difíceis\" escrevem-se um por linha.\nCom \"＋ Adicionar um passo\" junta-se uma linha, e com ↑ ↓ muda-se a ordem.\nEm \"Linhas de apoio\" escrevem-se o nome e o número de telefone das linhas de apoio.",
+      "No Início há dois botões, \"Voltar ao aqui e agora\" e \"Plano para os momentos difíceis\".\nAo tocar num deles, o que foi escrito na sala aparece um de cada vez.\nAvança-se com \"Avançar\" e \"Anterior\", e volta-se ao Início com \"Fechar\".",
+      "Em caso de perigo, é possível ligar logo.\nAo tocar em \"119 Ambulância\" ou \"110 Polícia\", em baixo, abre-se a aplicação do telefone com esse número.\nAs linhas escritas em \"Linhas de apoio\" também aparecem aí. Enquanto os passos são mostrados, estes botões ficam no topo.",
+      "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado para fora.\nAo mudar para um telefone novo, tocar em \"Exportar\" em \"Ajustes\" para guardar uma cópia e, no telefone novo, tocar em \"Importar\".\nPara mudar depressa de página, tocar em \"× Fechar\" no topo. Abre-se uma página do Google.",
+      "Em \"Ajustes\" é possível mudar o \"Tamanho do texto\" (Normal, Grande, Muito grande) e a \"Cor\" (Verde, Azul-claro, Branco, Preto).\nTambém se pode mudar aí a \"Música\" e o \"Som ao tocar\".\nO idioma escolhe-se no topo, em \"Language\"."
+    ]
   }
 });
 /* ---- /pt ---- */
@@ -1191,6 +1371,32 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Schrijf hier",
       "saved": "Opgeslagen ✓"
     }
+  },
+  "guide": {
+    "title": "Uitleg",
+    "step": "{n} / {m}",
+    "start": "Beginnen",
+    "again": "Opnieuw bekijken",
+    "heads": [
+      "Welkom bij Eén voor één - SOYOGI",
+      "De invoerruimte openen",
+      "De invoerruimte",
+      "Stappen schrijven",
+      "In een moeilijk moment, de knoppen op Home",
+      "Belknoppen",
+      "Wat u schrijft, blijft op dit apparaat",
+      "Beter leesbaar maken"
+    ],
+    "bodies": [
+      "Deze app laat in moeilijke momenten, scherm voor scherm, de stappen zien die u zelf hebt bepaald toen het goed met u ging.\nHet is geen vervanging van medische zorg.\nAls het gevaarlijk wordt, neem dan contact op met 119 (ambulance, Japan), 110 (politie, Japan) of een hulplijn.",
+      "U schrijft uw stappen op wanneer het goed met u gaat.\nTik 5 keer achter elkaar op de naam van de app bovenaan, dan gaat de \"Invoerruimte\" open.\nEr is geen knop naar deze ruimte. Deze uitleg verschijnt niet meer als u hem tot het einde hebt gelezen. Onthoud dus hoe u de ruimte opent.",
+      "De ruimte heeft 9 onderdelen, zoals \"Waar ik nu ben\" en \"Woorden voor mezelf\".\nTik op een onderdeel en schrijf. Alles wordt meteen bewaard. U hoeft niet alles in te vullen.\nMet \"Klaar\" gaat u terug naar de lijst. De ruimte sluit als u op \"Sluiten\" tikt of de app verlaat.",
+      "Schrijf de stappen voor \"Terug naar het hier en nu\" en \"Plan voor gevaarlijke momenten\" één per regel.\nMet \"＋ Stap toevoegen\" voegt u een regel toe, met ↑ ↓ verandert u de volgorde.\nBij \"Hulplijnen\" schrijft u de naam en het telefoonnummer van hulplijnen.",
+      "Op Home staan twee knoppen, \"Terug naar het hier en nu\" en \"Plan voor gevaarlijke momenten\".\nAls u erop tikt, verschijnt wat u in de ruimte hebt geschreven, scherm voor scherm.\nGa verder met \"Volgende\" en \"Vorige\", en ga met \"Sluiten\" terug naar Home.",
+      "Bij gevaar kunt u meteen bellen.\nTik onderaan op \"119 Ambulance\" of \"110 Politie\", dan opent uw telefoon-app met dat nummer.\nDe hulplijnen die u bij \"Hulplijnen\" hebt geschreven, staan daar ook. Terwijl uw stappen te zien zijn, staan deze knoppen bovenaan.",
+      "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd.\nAls u overstapt naar een nieuwe telefoon, tikt u in \"Instellingen\" op \"Exporteren\" om een bestand op te slaan, en op de nieuwe telefoon op \"Importeren\".\nWilt u snel een ander scherm? Tik bovenaan op \"× Sluiten\", dan opent een pagina van Google.",
+      "In \"Instellingen\" kunt u de \"Lettergrootte\" (Normaal, Groot, Heel groot) en de \"Kleur\" (Groen, Lichtblauw, Wit, Zwart) veranderen.\nOok \"Muziek\" en \"Tikgeluid\" kunt u daar veranderen.\nDe taal kiest u bovenaan bij \"Language\"."
+    ]
   }
 });
 /* ---- /nl ---- */
@@ -1358,6 +1564,32 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "Skriv här",
       "saved": "Sparat ✓"
     }
+  },
+  "guide": {
+    "title": "Så använder du appen",
+    "step": "{n} / {m}",
+    "start": "Börja",
+    "again": "Visa igen",
+    "heads": [
+      "Välkommen till En i taget - SOYOGI",
+      "Så öppnar du registreringsrummet",
+      "Registreringsrummet",
+      "Skriva dina steg",
+      "I svåra stunder, knapparna på Hem",
+      "Ringknappar",
+      "Det du skriver stannar på den här enheten",
+      "Gör det lättare att se"
+    ],
+    "bodies": [
+      "Den här appen visar i svåra stunder, en skärm i taget, de steg du själv bestämde när du mådde bra.\nDen ersätter inte sjukvård.\nOm det är farligt, ring 119 (ambulans), 110 (polis) eller en hjälplinje. Numren 119 och 110 gäller i Japan.",
+      "Du skriver dina steg när du mår bra.\nTryck på appens namn högst upp 5 gånger i rad, så öppnas \"Registreringsrummet\".\nDet finns ingen knapp till rummet. Den här guiden visas inte igen när du har läst den till slutet, så kom ihåg hur du öppnar rummet.",
+      "Rummet har 9 delar, till exempel \"Platsen där jag är nu\" och \"Ord till mig själv\".\nTryck på en del och skriv. Det sparas medan du skriver. Du behöver inte fylla i allt.\n\"Klart\" tar dig tillbaka till listan. Rummet stängs när du trycker på \"Stäng\" eller lämnar appen.",
+      "Skriv stegen för \"Tillbaka till här och nu\" och \"Plan för farliga stunder\", ett per rad.\nMed \"＋ Lägg till ett steg\" lägger du till en rad, och med ↑ ↓ ändrar du ordningen.\nUnder \"Hjälplinjer\" skriver du namn och telefonnummer till hjälplinjer.",
+      "På Hem finns två knappar, \"Tillbaka till här och nu\" och \"Plan för farliga stunder\".\nNär du trycker på en av dem visas det du skrev i rummet, en skärm i taget.\nGå vidare med \"Nästa\" och \"Föregående\", och tillbaka till Hem med \"Stäng\".",
+      "Om det är farligt kan du ringa direkt.\nTryck på \"119 Ambulans\" eller \"110 Polis\" längst ner, så öppnas telefonappen med det numret.\nHjälplinjerna du skrev under \"Hjälplinjer\" visas där också. Medan dina steg visas finns knapparna högst upp.",
+      "Allt du skriver sparas bara på den här enheten. Inget skickas någonstans.\nNär du byter till en ny telefon trycker du på \"Exportera\" i \"Inställningar\" för att spara en fil, och sedan på \"Importera\" på den nya telefonen.\nOm du snabbt vill byta skärm trycker du på \"× Stäng\" högst upp. Då öppnas en sida från Google.",
+      "I \"Inställningar\" kan du ändra \"Textstorlek\" (Normal, Stor, Mycket stor) och \"Färg\" (Grön, Ljusblå, Vit, Svart).\nDär kan du också ändra \"Musik\" och \"Knappljud\".\nSpråket väljer du högst upp under \"Language\"."
+    ]
   }
 });
 /* ---- /sv ---- */
@@ -1525,6 +1757,32 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "여기에 써요",
       "saved": "저장했어요 ✓"
     }
+  },
+  "guide": {
+    "title": "사용법",
+    "step": "{n} / {m}",
+    "start": "시작하기",
+    "again": "다시 보기",
+    "heads": [
+      "하나씩 - SOYOGI에 오신 것을 환영해요",
+      "등록하는 방을 여는 법",
+      "등록하는 방",
+      "순서 쓰기",
+      "힘들 때는 홈의 버튼",
+      "전화 버튼",
+      "쓴 내용은 이 기기 안에만",
+      "보기 편하게"
+    ],
+    "bodies": [
+      "이 앱은 마음이 괜찮을 때 스스로 정한 순서를, 힘들 때 한 화면씩 보여 주는 도구예요.\n의료를 대신하지는 않아요.\n위험할 때는 119(구급)·110(경찰) 같은 일본의 긴급 번호나 상담 창구에 연락해 주세요.",
+      "순서는 마음이 괜찮을 때 써 두어요.\n맨 위의 앱 이름을 5번 연속으로 누르면 '등록하는 방'이 열려요.\n방으로 들어가는 버튼은 없어요. 이 안내는 끝까지 읽으면 다시 나오지 않으니, 여는 법을 기억해 주세요.",
+      "방에는 '지금 있는 곳', '나에게 하는 말' 등 9개 항목이 있어요.\n항목을 누르고 쓰면 쓰는 동안 바로 저장돼요. 다 쓰지 않아도 괜찮아요.\n'완료'를 누르면 항목 목록으로 돌아가요. '닫기'를 누르거나 앱을 벗어나면 방이 닫혀요.",
+      "'지금 여기로 돌아오기'와 '위험할 때의 계획'의 순서는 한 줄에 하나씩 써요.\n'＋ 단계 추가'로 줄을 늘리고, ↑ ↓로 차례를 바꿔요.\n'상담 창구'에는 창구의 이름과 전화번호를 써요.",
+      "홈에는 '지금 여기로 돌아오기'와 '위험할 때의 계획' 두 버튼이 있어요.\n누르면 방에서 쓴 내용이 한 화면에 하나씩 나와요.\n'다음'과 '이전'으로 넘기고, '닫기'로 홈에 돌아가요.",
+      "위험할 때는 바로 전화할 수 있어요.\n화면 아래의 '119 구급'이나 '110 경찰'을 누르면 그 번호로 전화 앱이 열려요.\n'상담 창구'에 쓴 창구도 여기에 나와요. 순서를 보여 주는 동안에는 맨 위에 있어요.",
+      "쓴 내용은 모두 이 기기 안에만 저장돼요. 어디에도 보내지 않아요.\n새 스마트폰으로 옮길 때는 '설정'의 '내보내기'로 파일을 저장하고, 새 스마트폰에서 '가져오기'를 눌러 주세요.\n화면을 빨리 바꾸고 싶을 때는 맨 위의 '× 닫기'를 누르면 Google 페이지가 열려요.",
+      "'설정'에서 '글자 크기'(보통·크게·아주 크게)와 '색깔'(초록·하늘색·흰색·검정)을 바꿀 수 있어요.\n'BGM'과 '터치 소리'도 여기서 바꿀 수 있어요.\n언어는 맨 위의 'Language'에서 고를 수 있어요."
+    ]
   }
 });
 /* ---- /ko ---- */
@@ -1692,6 +1950,32 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "在这里写",
       "saved": "已保存 ✓"
     }
+  },
+  "guide": {
+    "title": "使用方法",
+    "step": "{n} / {m}",
+    "start": "开始",
+    "again": "再看一次",
+    "heads": [
+      "欢迎使用 一个一个来 - SOYOGI",
+      "怎样打开登记的房间",
+      "登记的房间",
+      "写下步骤",
+      "难受的时候，用首页的按钮",
+      "电话按钮",
+      "写下的内容只在这台设备里",
+      "让画面更好看清"
+    ],
+    "bodies": [
+      "这个应用会把状态好的时候自己定下的步骤，在难受的时候一次一屏地显示出来。\n它不能代替医疗。\n遇到危险时，请联系日本的 119(急救)、110(警察)，或者咨询窗口。",
+      "步骤要在状态好的时候先写好。\n连续点按最上方的应用名称 5 次，就会打开“登记的房间”。\n没有进入房间的按钮。这份说明读到最后就不会再出现，请记住打开的方法。",
+      "房间里有“现在所在的地方”“给自己的话”等 9 个项目。\n点按项目后书写，写的同时就会保存。不用全部写完也没关系。\n点“完成”回到项目列表。点“关闭”或离开应用，房间就会关上。",
+      "“回到此时此地”和“危险时的计划”的步骤，一行写一个。\n用“＋ 添加步骤”增加一行，用 ↑ ↓ 调整顺序。\n在“咨询窗口”里写下窗口的名称和电话号码。",
+      "首页有“回到此时此地”和“危险时的计划”两个按钮。\n点按后，在房间里写下的内容会一次一屏地显示出来。\n用“下一个”“上一个”翻页，点“关闭”回到首页。",
+      "遇到危险时，可以马上打电话。\n点按画面下方的“119 急救”或“110 警察”，电话应用就会带着这个号码打开。\n写在“咨询窗口”里的窗口也会排在这里。显示步骤的时候，这些按钮在最上方。",
+      "写下的内容全部只保存在这台设备里，不会发送到任何地方。\n换新手机时，请在“设置”里点“导出”保存文件，再在新手机上点“导入”。\n想马上切换画面时，点最上方的“× 关闭”，就会打开 Google 的页面。",
+      "在“设置”里可以更改“文字大小”(普通、大、特大)和“颜色”(绿色、浅蓝、白色、黑色)。\n“背景音乐”和“点按音”也可以在这里更改。\n语言可以在最上方的“Language”里选择。"
+    ]
   }
 });
 /* ---- /zh ---- */
@@ -1859,6 +2143,32 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "textPh": "اكتب هنا",
       "saved": "تم الحفظ ✓"
     }
+  },
+  "guide": {
+    "title": "طريقة الاستخدام",
+    "step": "⁦{n} / {m}⁩",
+    "start": "ابدأ",
+    "again": "عرض مرة أخرى",
+    "heads": [
+      "مرحبًا بك في واحدة تلو الأخرى - SOYOGI",
+      "كيف تفتح غرفة التسجيل",
+      "غرفة التسجيل",
+      "كتابة الخطوات",
+      "في الأوقات الصعبة، زرّا الرئيسية",
+      "أزرار الاتصال",
+      "ما تكتبه يبقى في هذا الجهاز",
+      "لرؤية أوضح"
+    ],
+    "bodies": [
+      "هذا التطبيق أداة تعرض، في الأوقات الصعبة، الخطوات التي قررتها بنفسك حين كنت بخير، شاشة واحدة في كل مرة.\nهو ليس بديلًا عن الرعاية الطبية.\nعند الخطر، يُرجى الاتصال بالرقم 119 (الإسعاف) أو 110 (الشرطة) في اليابان، أو بجهة استشارة.",
+      "تُكتب الخطوات في وقت تكون فيه بخير.\nاضغط على اسم التطبيق في الأعلى 5 مرات متتالية، فتُفتح «غرفة التسجيل».\nلا يوجد زر للدخول إلى الغرفة. ولن يظهر هذا الدليل مرة أخرى بعد قراءته حتى النهاية، فتذكّر طريقة فتحها.",
+      "في الغرفة 9 أقسام، مثل «المكان الذي أنا فيه الآن» و«كلمات لنفسي».\nاضغط على قسم واكتب، فيُحفظ ما تكتبه فورًا. لا داعي لكتابة كل شيء.\nيعيدك زر «تم» إلى قائمة الأقسام. وتُغلق الغرفة عند الضغط على «إغلاق» أو عند مغادرة التطبيق.",
+      "اكتب خطوات «العودة إلى هنا والآن» و«خطة وقت الخطر»، خطوة واحدة في كل سطر.\nأضف سطرًا بزر «＋ إضافة خطوة»، وغيّر الترتيب بالسهمين ↑ ↓.\nفي «جهات الاستشارة» اكتب اسم الجهة ورقم هاتفها.",
+      "في الرئيسية زرّان، «العودة إلى هنا والآن» و«خطة وقت الخطر».\nعند الضغط على أحدهما، يظهر ما كتبته في الغرفة شاشة واحدة في كل مرة.\nتنقّل بزرّي «التالي» و«السابق»، وارجع إلى الرئيسية بزر «إغلاق».",
+      "عند الخطر، يمكنك الاتصال فورًا.\nاضغط على «119 الإسعاف» أو «110 الشرطة» أسفل الشاشة، فيُفتح تطبيق الهاتف بهذا الرقم.\nوتظهر هنا أيضًا الجهات التي كتبتها في «جهات الاستشارة». وأثناء عرض الخطوات تكون هذه الأزرار في الأعلى.",
+      "كل ما تكتبه يُحفظ في هذا الجهاز فقط. ولا يُرسل إلى أي مكان.\nعند الانتقال إلى هاتف جديد، اضغط على «تصدير» في «الإعدادات» لحفظ ملف، ثم اضغط على «استيراد» في الهاتف الجديد.\nإذا أردت تغيير الشاشة بسرعة، اضغط على «× إغلاق» في الأعلى، فتُفتح صفحة من Google.",
+      "في «الإعدادات» يمكنك تغيير «حجم الخط» (عادي، كبير، كبير جدًا) و«اللون» (أخضر، أزرق فاتح، أبيض، أسود).\nويمكنك هناك أيضًا تغيير «موسيقى الخلفية» و«صوت النقر».\nاختر اللغة من «Language» في الأعلى."
+    ]
   }
 });
 /* ---- /ar ---- */

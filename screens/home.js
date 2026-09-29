@@ -1,7 +1,7 @@
 'use strict';
 /* 画面: ホーム(常に見えるのは中立な2ボタンだけ)
    ・「いま ここに もどる」「あぶないときの けいかく」→ 本人が書いた文を1画面1動作で出す(lib.js の openPlayer)
-   ・初回起動だけ免責を1画面で出す(「わかった」で閉じる)
+   ・初回起動は「はじめての つかいかた」(免責の4点を含む・読み終えるまで毎回)。免責の1画面は案内が使えないときだけ(lib.js firstRun)
    ・アプリ名(ヘッダー)を5回連打すると「とうろくの へや」(screens/edit.js)が開く。痕跡は出さない・アプリを離れると閉じる(edit.js)
      (app.js が hd-title のタップを home モジュールの onTitleTap に渡し、true が返ったらホームへ戻らない) */
 (function(){
@@ -25,7 +25,7 @@
       c.appendChild(bPlan);
 
       L.renderSos(api);
-      if(!L.hasAgreed(api) && !document.querySelector('.ov-agree')) L.openAgree(api);
+      L.firstRun(api);   // はじめての つかいかた(読み終えるまで)→ 読み終えたら免責も済んだ扱い(lib.js)
     },
     /* ヘッダーのアプリ名タップ(app.js から呼ばれる)。5連打で登録の部屋を開く。多めに押しても通過した瞬間に開く */
     onTitleTap: function(api){
