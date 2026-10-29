@@ -9,7 +9,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.8';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.9';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_anshin';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'anshin.';
 var LS_PREF = LS + 'pref.v1';
@@ -573,24 +573,32 @@ function importBackup(e){
 }
 /* このアプリのデータ(「anshin.」で始まり pref 以外)をファイルの中身に入れ替える。
    pref はファイルの data に入っていても使わない(sanitizePref のホワイトリストだけを通す)。
-   書けなかったら(容量オーバー等)書いた分を消して元に戻し false */
+   書けなかったら(容量オーバー等)書いた分を消して元に戻し false
+   🔴 案内を読んだ印(guide.v1 = はじめての つかいかた / agreed.v1 = 免責を読んだ)は記録ではなく この端末のことなので消さない。
+     ファイルに「読んだ」(true)とあるときだけ受け取る(印の無い古いバックアップを読んでも、次に案内がもう一度出ない・2026-10-30) */
+var KEEP_MARKS = [LS + 'guide.v1', LS + 'agreed.v1'];
 function replaceData(obj){
-  var old = {}, k, i;
+  var old = {}, keep = {}, k, i;
   try{
     for(i = 0; i < localStorage.length; i++){
       k = localStorage.key(i);
-      if(k && k.indexOf(LS) === 0 && k !== LS_PREF) old[k] = localStorage.getItem(k);
+      if(!k || k.indexOf(LS) !== 0 || k === LS_PREF) continue;
+      if(KEEP_MARKS.indexOf(k) >= 0) keep[k] = localStorage.getItem(k);   // 読んだ印は残す(消さない)
+      else old[k] = localStorage.getItem(k);
     }
   }catch(_){ return false; }
   for(k in old) removeKey(k);
-  var okAll = true;
+  var okAll = true, written = [];
   for(k in obj){
     if(!Object.prototype.hasOwnProperty.call(obj, k) || LS + k === LS_PREF) continue;
+    if(KEEP_MARKS.indexOf(LS + k) >= 0 && obj[k] !== true) continue;   // 読んだ印は true のときだけ受け取る
     if(!saveJSON(LS + k, obj[k])){ okAll = false; break; }
+    written.push(LS + k);
   }
   if(okAll) return true;
-  for(k in obj){ if(LS + k !== LS_PREF) removeKey(LS + k); }
+  written.forEach(removeKey);
   for(k in old){ try{ localStorage.setItem(k, old[k]); }catch(_){} }
+  for(k in keep){ try{ localStorage.setItem(k, keep[k]); }catch(_){} }
   return false;
 }
 
