@@ -59,7 +59,11 @@
     <div class="set-row"><span id="lbl-sound"></span><button id="btn-sound" class="set-btn"></button></div>
 
     <!-- BUILDER: アプリ固有の設定行はここに足す(id は set-app-* で) -->
-    <div id="set-app-rows"></div>
+    <div id="set-app-rows">
+      <!-- とうろくの へやの ボタン(既定は出さない。読み上げ・スイッチ操作で使う人が自分で出す・app.js) -->
+      <div id="set-edit-row" class="set-row"><span id="lbl-editopt"></span><button id="btn-editopt" class="set-btn"></button></div>
+      <div id="set-edit-open-row" class="hidden"><button id="btn-editopen" class="set-btn"></button></div>
+    </div>
 
     <!-- はじめての つかいかた を もう一度(app.js openGuide・GUIDE_AGAIN=false なら隠す) -->
     <div id="set-guide-row" class="set-row"><span id="lbl-guide"></span><button id="btn-guide" class="set-btn"></button></div>

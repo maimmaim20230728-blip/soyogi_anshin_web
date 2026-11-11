@@ -48,12 +48,12 @@ header#hd{
 #lang-wrap{ display:flex; flex-direction:column; align-items:center; gap:3px; flex-shrink:0; }
 .lang-label{ font-size:.55em; font-weight:700; color:#fff; line-height:1; letter-spacing:.02em; }
 #hd #set-lang{
-  min-height:44px; font-size:.95em; font-family:inherit;
+  min-height:48px; font-size:.95em; font-family:inherit;
   border:none; border-radius:8px; padding:2px 6px;
   background:#fff; color:#1a1a1a;
 }
 .hd-btn{
-  min-height:44px; min-width:44px; padding:0 10px;
+  min-height:48px; min-width:48px; padding:0 10px;
   border:none; border-radius:8px; background:rgba(255,255,255,.22); color:#fff;
   font-size:1em; font-family:inherit; font-weight:700;
 }
@@ -295,7 +295,11 @@ body[data-theme="dark"] .sos-btn{ border-color:#ef9a9a; }
 .edit-line{ gap:6px; flex-wrap:wrap; }
 .edit-line .edit-num{ flex:none; width:1.6em; text-align:center; color:var(--sub); font-weight:700; }
 .list li.edit-line .edit-line-inp{ flex:1 1 calc(100% - 1.6em - 12px); }   /* .list li .grow(flex:1)より強く。12px = 行の gap(10px)+ゆとり */
-.edit-line .btn{ min-width:44px; padding:0 8px; flex:none; }
+.edit-line .btn{ min-width:48px; padding:0 8px; flex:none; }   /* 手の震える人・高齢の人向けに幅 48px(高さは52px) */
+.edit-long{ font-size:.85em; margin:4px 0 8px; }
+.edit-try{ margin-top:8px; }
+#set-edit-open-row{ padding:8px 0; border-bottom:1px solid var(--line); }
+#set-edit-open-row .set-btn{ width:100%; }
 .edit-line .edit-up{ margin-inline-start:auto; }
 .edit-line .edit-del{ margin-inline-start:14px; }
 .edit-line .btn:disabled{ opacity:.35; }

@@ -201,6 +201,13 @@
       var a = d[id][i]; d[id][i] = d[id][j]; d[id][j] = a;
       if(persist(api, d, function(){ var b = d[id][i]; d[id][i] = d[id][j]; d[id][j] = b; })) draw();
     }
+    /* 1行が長いと本番の1画面に入りきらずスクロールになる。長い行があるときだけ小さく目安を出す(禁止ではない・読み上げない) */
+    var LONG = (api.lang === 'ja' || api.lang === 'zh' || api.lang === 'ko') ? 40 : 90;
+    var warn = api.el('p', 'hint edit-long hidden', T(api, 'longHint'));
+    function updWarn(){
+      var long = d[id].some(function(s){ return Array.from(String(s || '').trim()).length > LONG; });
+      warn.classList.toggle('hidden', !long);
+    }
     function draw(){
       list.textContent = '';
       d[id].forEach(function(line, idx){
@@ -208,7 +215,7 @@
         li.appendChild(api.el('span', 'edit-num', String(idx + 1)));
         var inp = input(api, line, T(api, 'stepPh'));
         inp.className = 'grow edit-line-inp';
-        inp.addEventListener('input', function(){ var p = d[id][idx]; d[id][idx] = inp.value; persist(api, d, function(){ d[id][idx] = p; inp.value = p; }); });
+        inp.addEventListener('input', function(){ var p = d[id][idx]; d[id][idx] = inp.value; persist(api, d, function(){ d[id][idx] = p; inp.value = p; }); updWarn(); });
         li.appendChild(inp);
         var up = api.el('button', 'btn edit-up', '↑');
         up.setAttribute('aria-label', T(api, 'up'));
@@ -227,15 +234,21 @@
         li.appendChild(up); li.appendChild(dn); li.appendChild(del);
         list.appendChild(li);
       });
+      updWarn();
     }
     draw();
     c.appendChild(list);
+    c.appendChild(warn);
     var add = api.el('button', 'btn wide edit-add', '＋ ' + T(api, 'addStep'));
     api.Tap.bind(add, function(){
       d[id].push('');
       if(persist(api, d, function(){ d[id].pop(); })) draw();
     });
     c.appendChild(add);
+    /* ためしに ひらく: いまの並びで本番の1画面1動作の表示を、部屋の中から見る(閉じれば この部屋に戻る) */
+    var tryB = api.el('button', 'btn wide edit-try', T(api, 'try'));
+    api.Tap.bind(tryB, function(){ window.ANSHIN_LIB.openPlayer(api, id === 'plan' ? 'plan' : 'now'); });
+    c.appendChild(tryB);
     foot(c, api);
   }
 

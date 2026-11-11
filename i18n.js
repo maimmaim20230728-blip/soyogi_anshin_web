@@ -41,6 +41,9 @@ var ja = {
     exported:'かきだしました ✓', imported:'よみこみました ✓', importFail:'よみこめませんでした',
     importConfirm:'いまの ないようは、ファイルの ないように おきかわります。よみこみますか?',
     note:'書いたことは すべて この端末の中だけに ほぞんされます。どこにも 送られません。',
+    editOpt:'とうろくの へやの ボタン',
+    editOpen:'とうろくの へやを ひらく',
+    importConfirmDate:'{d} の ファイルです。いまの ないようは きえて、ファイルの ないように おきかわります。よみこみますか?',
     privacy:'プライバシーポリシー',
     credit:'アプリ開発：介護と支援の相談どころ そよぎ'
   },
@@ -88,7 +91,7 @@ var ja = {
         calm:'じぶんに きく こきゅうの しかたや、さわると おちつく ものを、じぶんの ことばで。',
         signs:'「こうなったら あぶない」と じぶんで きめた サイン。',
         contacts:'なまえと でんわばんごう。ぜんぶ 書かなくても だいじょうぶです。',
-        windows:'119(きゅうきゅう)と 110(けいさつ)は いつも でます。ほかの まどぐちは じぶんで たしてください。',
+        windows:'119(きゅうきゅう)と 110(けいさつ)は いつも でます。ほかの まどぐちは じぶんで たしてください。 番号は 公式サイトで たしかめて、じぶんで 入れてください。たとえば「よりそいホットライン」「いのちの電話」。',
         steps:'ひとつの てじゅんを 1行で。うえから じゅんばんに でます。',
         plan:'ひとつの てじゅんを 1行で。「きいろ しんごうの とき」の あとに でます。',
         yellow:'まだ あぶなくは ないけれど、つかれている とき。やすみかたと、ちいさな いっぽを ひとつだけ。'
@@ -96,6 +99,8 @@ var ja = {
       name:'なまえ', tel:'でんわばんごう', addRow:'ついか', del:'けす', delAgain:'もういちど おすと けします',
       stepPh:'てじゅんを 1行で', addStep:'てじゅんを ついか', up:'うえへ', down:'したへ',
       yellowRest:'やすみかた(じぶんの ことばで)', yellowStep:'ちいさな いっぽ(ひとつだけ)',
+      try:'ためしに ひらく',
+      longHint:'ひとつの 画面に よむ ぶんは みじかく',
       textPh:'ここに かきます', saved:'ほぞんしました ✓'
     }
   },
@@ -117,7 +122,7 @@ var ja = {
     ],
     bodies:[
       'このアプリは、元気なときに じぶんで きめた手順を、つらいときに 1画面ずつ 出す道具です。\n医療の代わりでは ありません。\nあぶないときは、119(きゅうきゅう)・110(けいさつ)や 相談窓口に れんらくしてください。',
-      'てじゅんは、元気なときに 書いておきます。\nいちばん上の アプリの名前を 5回 つづけて おすと、「とうろく の へや」が ひらきます。\nへやに はいる ボタンは ありません。この案内は さいごまで 読むと もう 出ないので、ひらきかたを おぼえておいてください。',
+      'てじゅんは、元気なときに 書いておきます。\nいちばん上の アプリの名前を 5回 つづけて おすと、「とうろく の へや」が ひらきます。\nふだんは へやに はいる ボタンは ありません。よみあげや スイッチで つかう ひとは、「せってい」の「とうろくの へやの ボタン」を ON に すると、ひらく ボタンが 出ます。この案内は さいごまで 読むと もう 出ないので、ひらきかたを おぼえておいてください。',
       'へやには、「いまいる ばしょ」「じぶんへの ことば」など、9つの 項目が あります。\n項目を おして 書くと、書いた そばから ほぞんされます。ぜんぶ 書かなくても だいじょうぶです。\n「できた」で 項目の 一覧に もどります。「とじる」を おすか、アプリを はなれると、へやは とじます。',
       '「いま ここに もどる」と「あぶないときの けいかく」の てじゅんは、1行に ひとつずつ 書きます。\n「＋ てじゅんを ついか」で 行を ふやし、↑ ↓ で じゅんばんを かえます。\n「まどぐち」には、相談窓口の なまえと でんわばんごうを 書きます。',
       'ホームには、「いま ここに もどる」と「あぶないときの けいかく」の 2つの ボタンが あります。\nおすと、へやで 書いた ことばが 1画面に ひとつずつ 出ます。\n「つぎ」「まえ」で すすみ、「とじる」で ホームに もどります。',
@@ -159,6 +164,9 @@ var en = {
     exported:'Exported ✓', imported:'Imported ✓', importFail:'Could not import',
     importConfirm:"Your current entries will be replaced with the file's contents. Import it?",
     note:'Everything you write is stored only on this device. Nothing is sent anywhere.',
+    editOpt:"Registration room button",
+    editOpen:"Open the registration room",
+    importConfirmDate:"This file is from {d}. Your current entries will be replaced with the file's contents. Import it?",
     privacy:'Privacy policy',
     credit:'Developed by SOYOGI, a care and support consultation service'
   },
@@ -203,7 +211,7 @@ var en = {
         calm:'The breathing that works for you and the things that calm you when you touch them, in your own words.',
         signs:'The signs you decided mean "this is getting dangerous".',
         contacts:'Name and phone number. You do not have to fill in everything.',
-        windows:'119 (ambulance) and 110 (police), the emergency numbers in Japan, are always shown. Add other helplines yourself.',
+        windows:'119 (ambulance) and 110 (police), the emergency numbers in Japan, are always shown. Add other helplines yourself. Check the number on the official website and enter it yourself. For example: Yorisoi Hotline, Inochi no Denwa (Japan).',
         steps:'One step per line. They are shown from the top, one at a time.',
         plan:'One step per line. They are shown after "When the light is yellow".',
         yellow:'Not dangerous yet, but tired. How you rest, and just one small step.'
@@ -211,6 +219,8 @@ var en = {
       name:'Name', tel:'Phone number', addRow:'Add', del:'Delete', delAgain:'Tap again to delete',
       stepPh:'One step in one line', addStep:'Add a step', up:'Up', down:'Down',
       yellowRest:'How I rest (in my own words)', yellowStep:'One small step (just one)',
+      try:"Try it out",
+      longHint:"Keep the text for one screen short.",
       textPh:'Write here', saved:'Saved ✓'
     }
   },
@@ -228,7 +238,7 @@ var en = {
     ],
     bodies:[
       'In hard moments, this app shows the steps you decided for yourself when you were well, one screen at a time.\nIt is not a substitute for medical care.\nIf you are in danger, call 119 (ambulance) or 110 (police) in Japan, or a helpline.',
-      'Write your steps while you are well.\nTap the app name at the top 5 times in a row to open the "Registration room".\nThere is no button for the room. This guide does not appear again once you have read it to the end, so please remember how to open the room.',
+      'Write your steps while you are well.\nTap the app name at the top 5 times in a row to open the "Registration room".\nNormally there is no button for the room. If you use a screen reader or switch control, turn on “Registration room button” in Settings to show an open button. This guide does not appear again once you have read it to the end, so please remember how to open the room.',
       'The room has 9 items, such as "The place I am in" and "Words to myself".\nTap an item and write. It is saved as you type. You do not have to fill in everything.\n"Done" takes you back to the list of items. The room closes when you tap "Close" or leave the app.',
       'Write the steps for "Come back to here and now" and "My plan for hard moments" one per line.\nUse "＋ Add a step" to add a line, and ↑ ↓ to change the order.\nUnder "Helplines", write the names and phone numbers of helplines.',
       'Home has two buttons: "Come back to here and now" and "My plan for hard moments".\nTap one, and what you wrote in the room appears one screen at a time.\nMove with "Next" and "Previous", and tap "Close" to go back to Home.',
@@ -326,6 +336,9 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Konnte nicht importiert werden",
     "importConfirm": "Ihre aktuellen Einträge werden durch den Inhalt der Datei ersetzt. Jetzt importieren?",
     "note": "Alles, was Sie schreiben, bleibt nur auf diesem Gerät gespeichert. Nichts wird irgendwohin gesendet.",
+    "editOpt": "Taste für den Raum zum Eintragen",
+    "editOpen": "Raum zum Eintragen öffnen",
+    "importConfirmDate": "Diese Datei stammt vom {d}. Ihre aktuellen Einträge werden durch den Inhalt der Datei ersetzt. Jetzt importieren?",
     "privacy": "Datenschutzerklärung",
     "credit": "App-Entwicklung: SOYOGI, Beratungsstelle für Pflege und Unterstützung"
   },
@@ -387,7 +400,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "Die Atmung, die Ihnen hilft, und die Dinge, die Sie beruhigen, wenn Sie sie anfassen, in Ihren eigenen Worten.",
         "signs": "Die Zeichen, bei denen Sie selbst festgelegt haben: „Jetzt wird es gefährlich“.",
         "contacts": "Name und Telefonnummer. Sie müssen nicht alles ausfüllen.",
-        "windows": "Die japanischen Notrufnummern 119 (Rettungsdienst) und 110 (Polizei) werden immer angezeigt. Weitere Anlaufstellen fügen Sie selbst hinzu.",
+        "windows": "Die japanischen Notrufnummern 119 (Rettungsdienst) und 110 (Polizei) werden immer angezeigt. Weitere Anlaufstellen fügen Sie selbst hinzu. Prüfen Sie die Nummer auf der offiziellen Website und tragen Sie sie selbst ein. Zum Beispiel: Yorisoi Hotline, Inochi no Denwa (Japan).",
         "steps": "Ein Schritt pro Zeile. Sie werden von oben nach unten einzeln angezeigt.",
         "plan": "Ein Schritt pro Zeile. Sie werden nach „Wenn die Ampel auf Gelb steht“ angezeigt.",
         "yellow": "Noch nicht gefährlich, aber müde. Wie Sie sich ausruhen, und nur ein kleiner Schritt."
@@ -403,6 +416,8 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Nach unten",
       "yellowRest": "Wie ich mich ausruhe (in meinen eigenen Worten)",
       "yellowStep": "Ein kleiner Schritt (nur einer)",
+      "try": "Zur Probe öffnen",
+      "longHint": "Der Text für eine Seite sollte kurz sein.",
       "textPh": "Hier schreiben",
       "saved": "Gespeichert ✓"
     }
@@ -424,7 +439,7 @@ TBL.de = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Diese App zeigt in schweren Momenten, einen Bildschirm nach dem anderen, die Schritte, die Sie selbst festgelegt haben, als es Ihnen gut ging.\nSie ist kein Ersatz für medizinische Hilfe.\nWenn Sie in Gefahr sind, rufen Sie 119 (Rettungsdienst, Japan) oder 110 (Polizei, Japan) an oder wenden Sie sich an eine Beratungsstelle.",
-      "Schreiben Sie Ihre Schritte auf, solange es Ihnen gut geht.\nTippen Sie 5-mal hintereinander auf den App-Namen ganz oben, dann öffnet sich der „Raum zum Eintragen“.\nFür den Raum gibt es keine Taste. Diese Anleitung erscheint nicht mehr, wenn Sie sie bis zum Ende gelesen haben. Merken Sie sich bitte, wie sich der Raum öffnet.",
+      "Schreiben Sie Ihre Schritte auf, solange es Ihnen gut geht.\nTippen Sie 5-mal hintereinander auf den App-Namen ganz oben, dann öffnet sich der „Raum zum Eintragen“.\nNormalerweise gibt es für den Raum keine Taste. Wenn Sie einen Screenreader oder eine Schaltersteuerung nutzen, schalten Sie unter „Einstellungen“ die „Taste für den Raum zum Eintragen“ ein, dann erscheint eine Taste zum Öffnen. Diese Anleitung erscheint nicht mehr, wenn Sie sie bis zum Ende gelesen haben. Merken Sie sich bitte, wie sich der Raum öffnet.",
       "Der Raum hat 9 Punkte, zum Beispiel „Wo ich gerade bin“ und „Worte an mich selbst“.\nTippen Sie auf einen Punkt und schreiben Sie. Alles wird schon beim Schreiben gespeichert. Sie müssen nicht alles ausfüllen.\nMit „Fertig“ kommen Sie zur Liste zurück. Der Raum schließt sich, wenn Sie auf „Schließen“ tippen oder die App verlassen.",
       "Schreiben Sie die Schritte für „Zurück ins Hier und Jetzt“ und „Mein Plan für gefährliche Momente“ auf, einen Schritt pro Zeile.\nMit „＋ Schritt hinzufügen“ kommt eine Zeile dazu, mit ↑ ↓ ändern Sie die Reihenfolge.\nUnter „Anlaufstellen“ tragen Sie Namen und Telefonnummern von Beratungsstellen ein.",
       "Auf der Startseite gibt es zwei Tasten: „Zurück ins Hier und Jetzt“ und „Mein Plan für gefährliche Momente“.\nWenn Sie darauf tippen, erscheint das, was Sie im Raum geschrieben haben, einen Bildschirm nach dem anderen.\nMit „Weiter“ und „Zurück“ blättern Sie, mit „Schließen“ kehren Sie zur Startseite zurück.",
@@ -519,6 +534,9 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Impossible d'importer",
     "importConfirm": "Vos contenus actuels seront remplacés par le contenu du fichier. Voulez-vous importer ?",
     "note": "Tout ce que vous écrivez reste uniquement sur cet appareil. Rien n'est envoyé nulle part.",
+    "editOpt": "Bouton de l'espace d'écriture",
+    "editOpen": "Ouvrir l'espace d'écriture",
+    "importConfirmDate": "Ce fichier date du {d}. Vos contenus actuels seront remplacés par le contenu du fichier. Voulez-vous importer ?",
     "privacy": "Politique de confidentialité",
     "credit": "Application développée par SOYOGI, lieu de conseil pour les soins et le soutien"
   },
@@ -580,7 +598,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "La respiration qui vous aide et les choses qui vous apaisent quand vous les touchez, avec vos propres mots.",
         "signs": "Les signes que vous avez décidés vous-même comme \"là, ça devient dangereux\".",
         "contacts": "Nom et numéro de téléphone. Il n'est pas nécessaire de tout remplir.",
-        "windows": "Le 119 (ambulance) et le 110 (police) du Japon sont toujours affichés. Ajoutez vous-même les autres numéros d'aide.",
+        "windows": "Le 119 (ambulance) et le 110 (police) du Japon sont toujours affichés. Ajoutez vous-même les autres numéros d'aide. Vérifiez le numéro sur le site officiel et saisissez-le vous-même. Par exemple : Yorisoi Hotline, Inochi no Denwa (Japon).",
         "steps": "Une étape par ligne. Elles s'affichent dans l'ordre, en partant du haut.",
         "plan": "Une étape par ligne. Elles s'affichent après \"Quand le feu est orange\".",
         "yellow": "Ce n'est pas encore dangereux, mais la fatigue est là. Comment vous vous reposez, et un seul petit pas."
@@ -596,6 +614,8 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Descendre",
       "yellowRest": "Comment je me repose (avec mes propres mots)",
       "yellowStep": "Un petit pas (un seul)",
+      "try": "Essayer",
+      "longHint": "Gardez le texte d'un écran court.",
       "textPh": "Écrivez ici",
       "saved": "Enregistré ✓"
     }
@@ -617,7 +637,7 @@ TBL.fr = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Cette application est un outil qui montre, dans les moments difficiles, un écran à la fois, les étapes que vous avez décidées vous-même quand vous alliez bien.\nElle ne remplace pas les soins médicaux.\nEn cas de danger, contactez le 119 (ambulance) ou le 110 (police) au Japon, ou un numéro d'aide.",
-      "Écrivez vos étapes quand vous allez bien.\nAppuyez 5 fois de suite sur le nom de l'application, tout en haut, et l'\"Espace d'écriture\" s'ouvre.\nAucun bouton ne mène à cet espace. Ce guide ne s'affiche plus une fois lu jusqu'au bout, alors retenez bien comment l'ouvrir.",
+      "Écrivez vos étapes quand vous allez bien.\nAppuyez 5 fois de suite sur le nom de l'application, tout en haut, et l'\"Espace d'écriture\" s'ouvre.\nNormalement, aucun bouton ne mène à cet espace. Si vous utilisez un lecteur d'écran ou un contacteur, activez « Bouton de l'espace d'écriture » dans les « Réglages » : un bouton d'ouverture apparaît. Ce guide ne s'affiche plus une fois lu jusqu'au bout, alors retenez bien comment l'ouvrir.",
       "Cet espace contient 9 rubriques, par exemple \"Là où je suis\" et \"Mes mots pour moi-même\".\nAppuyez sur une rubrique et écrivez. Tout est enregistré au fur et à mesure. Il n'est pas nécessaire de tout remplir.\n\"Terminé\" vous ramène à la liste. L'espace se ferme quand vous appuyez sur \"Fermer\" ou quand vous quittez l'application.",
       "Écrivez les étapes de \"Revenir ici et maintenant\" et de \"Mon plan pour les moments difficiles\", une par ligne.\nAvec \"＋ Ajouter une étape\", vous ajoutez une ligne, et avec ↑ ↓ vous changez l'ordre.\nDans \"Numéros d'aide\", écrivez le nom et le numéro de téléphone des services d'aide.",
       "L'accueil a deux boutons, \"Revenir ici et maintenant\" et \"Mon plan pour les moments difficiles\".\nQuand vous appuyez dessus, ce que vous avez écrit dans l'espace s'affiche un écran à la fois.\nAvancez avec \"Suivant\" et \"Précédent\", puis revenez à l'accueil avec \"Fermer\".",
@@ -712,6 +732,9 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "No se pudo importar",
     "importConfirm": "Lo escrito ahora se reemplazará por el contenido del archivo. ¿Importar?",
     "note": "Todo lo escrito se guarda solo en este dispositivo. No se envía a ninguna parte.",
+    "editOpt": "Botón de la sala de registro",
+    "editOpen": "Abrir la sala de registro",
+    "importConfirmDate": "Este archivo es del {d}. Lo escrito ahora se reemplazará por el contenido del archivo. ¿Importar?",
     "privacy": "Política de privacidad",
     "credit": "Desarrollo de la aplicación: SOYOGI, espacio de consulta sobre cuidados y apoyo"
   },
@@ -773,7 +796,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "La forma de respirar que ayuda y las cosas que calman al tocarlas, con palabras propias.",
         "signs": "Las señales que uno mismo decidió que significan «si pasa esto, es peligroso».",
         "contacts": "Nombre y número de teléfono. No hace falta escribir todo.",
-        "windows": "El 119 (ambulancia) y el 110 (policía), números de emergencia de Japón, aparecen siempre. Las demás líneas de ayuda se añaden a mano.",
+        "windows": "El 119 (ambulancia) y el 110 (policía), números de emergencia de Japón, aparecen siempre. Las demás líneas de ayuda se añaden a mano. Compruebe el número en el sitio web oficial y escríbalo a mano. Por ejemplo: Yorisoi Hotline, Inochi no Denwa (Japón).",
         "steps": "Un paso por línea. Se muestran en orden, desde arriba.",
         "plan": "Un paso por línea. Se muestran después de «Cuando el semáforo está en amarillo».",
         "yellow": "Cuando todavía no hay peligro, pero sí cansancio. Una forma de descansar y un solo pequeño paso."
@@ -789,6 +812,8 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Abajo",
       "yellowRest": "Cómo descansar (con palabras propias)",
       "yellowStep": "Un pequeño paso (solo uno)",
+      "try": "Probar",
+      "longHint": "Conviene que el texto de cada pantalla sea corto.",
       "textPh": "Escribir aquí",
       "saved": "Guardado ✓"
     }
@@ -810,7 +835,7 @@ TBL.es = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Esta aplicación es una herramienta que muestra, en los momentos difíciles, una pantalla a la vez, los pasos que la propia persona decidió cuando se sentía bien.\nNo sustituye a la atención médica.\nEn caso de peligro, llamar al 119 (ambulancia, Japón), al 110 (policía, Japón) o a una línea de ayuda.",
-      "Los pasos se escriben en un momento en que uno se siente bien.\nAl tocar 5 veces seguidas el nombre de la aplicación, arriba del todo, se abre la «Sala de registro».\nNo hay ningún botón para entrar en la sala. Esta guía no vuelve a aparecer una vez leída hasta el final, así que conviene recordar cómo se abre.",
+      "Los pasos se escriben en un momento en que uno se siente bien.\nAl tocar 5 veces seguidas el nombre de la aplicación, arriba del todo, se abre la «Sala de registro».\nNormalmente no hay ningún botón para entrar en la sala. Quien use un lector de pantalla o un control por pulsador puede activar «Botón de la sala de registro» en «Ajustes»: aparece un botón para abrirla. Esta guía no vuelve a aparecer una vez leída hasta el final, así que conviene recordar cómo se abre.",
       "La sala tiene 9 apartados, por ejemplo «El lugar donde estoy ahora» y «Palabras para mí».\nAl tocar un apartado y escribir, lo escrito se guarda al momento. No hace falta rellenarlo todo.\n«Listo» vuelve a la lista de apartados. La sala se cierra al tocar «Cerrar» o al salir de la aplicación.",
       "Los pasos de «Volver al aquí y ahora» y del «Plan para los momentos de peligro» se escriben uno por línea.\nCon «＋ Añadir un paso» se añade una línea, y con ↑ ↓ se cambia el orden.\nEn «Líneas de ayuda» se escriben el nombre y el teléfono de los servicios de ayuda.",
       "En Inicio hay dos botones, «Volver al aquí y ahora» y «Plan para los momentos de peligro».\nAl tocarlos, lo escrito en la sala aparece una pantalla a la vez.\nSe avanza con «Siguiente» y «Anterior», y con «Cerrar» se vuelve a Inicio.",
@@ -905,6 +930,9 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Non è stato possibile importare",
     "importConfirm": "I contenuti attuali verranno sostituiti da quelli del file. Importare?",
     "note": "Tutto ciò che scrive resta solo in questo dispositivo. Non viene inviato da nessuna parte.",
+    "editOpt": "Pulsante della stanza di registrazione",
+    "editOpen": "Apri la stanza di registrazione",
+    "importConfirmDate": "Questo file è del {d}. I contenuti attuali verranno sostituiti da quelli del file. Importare?",
     "privacy": "Informativa sulla privacy",
     "credit": "App sviluppata da SOYOGI, sportello di consulenza per l'assistenza e il sostegno"
   },
@@ -966,7 +994,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "Il modo di respirare che funziona per Lei e le cose che La calmano quando le tocca, con parole Sue.",
         "signs": "I segnali che ha deciso Lei: \"se succede questo, è pericoloso\".",
         "contacts": "Nome e numero di telefono. Non è necessario compilare tutto.",
-        "windows": "Il 119 (ambulanza) e il 110 (polizia), numeri del Giappone, compaiono sempre. Aggiunga da sé gli altri sportelli.",
+        "windows": "Il 119 (ambulanza) e il 110 (polizia), numeri del Giappone, compaiono sempre. Aggiunga da sé gli altri sportelli. Controlli il numero sul sito ufficiale e lo inserisca da sé. Per esempio: Yorisoi Hotline, Inochi no Denwa (Giappone).",
         "steps": "Un passo per riga. Compaiono in ordine, dall'alto.",
         "plan": "Un passo per riga. Compaiono dopo \"Quando il semaforo è giallo\".",
         "yellow": "Non è ancora pericolo, ma c'è stanchezza. Come riposare e un solo piccolo passo."
@@ -982,6 +1010,8 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Giù",
       "yellowRest": "Come riposare (con parole Sue)",
       "yellowStep": "Un piccolo passo (uno solo)",
+      "try": "Prova",
+      "longHint": "Tenga breve il testo di ogni schermata.",
       "textPh": "Scriva qui",
       "saved": "Salvato ✓"
     }
@@ -1003,7 +1033,7 @@ TBL.it = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Questa app è uno strumento che mostra, nei momenti difficili e una schermata alla volta, i passi che ha deciso da sé quando stava bene.\nNon sostituisce le cure mediche.\nIn caso di pericolo, contatti il 119 (ambulanza) o il 110 (polizia), numeri del Giappone, oppure uno sportello di aiuto.",
-      "I passi si scrivono quando si sta bene.\nToccando 5 volte di seguito il nome dell'app in alto, si apre la \"Stanza di registrazione\".\nNon c'è nessun pulsante per entrare nella stanza. Questa guida non compare più dopo averla letta fino in fondo, quindi ricordi come si apre.",
+      "I passi si scrivono quando si sta bene.\nToccando 5 volte di seguito il nome dell'app in alto, si apre la \"Stanza di registrazione\".\nDi solito non c'è nessun pulsante per entrare nella stanza. Se usa uno screen reader o un controllo a interruttore, attivi «Pulsante della stanza di registrazione» in «Impostazioni»: comparirà un pulsante per aprirla. Questa guida non compare più dopo averla letta fino in fondo, quindi ricordi come si apre.",
       "La stanza ha 9 voci, per esempio \"Il luogo in cui si trova ora\" e \"Parole per sé\".\nTocchi una voce e scriva. Ciò che scrive si salva subito. Non serve compilare tutto.\n\"Fatto\" riporta all'elenco delle voci. La stanza si chiude toccando \"Chiudi\" o uscendo dall'app.",
       "Scriva i passi di \"Tornare al qui e ora\" e del \"Piano per i momenti difficili\" uno per riga.\nCon \"＋ Aggiungi un passo\" aggiunge una riga, con ↑ ↓ cambia l'ordine.\nIn \"Sportelli di aiuto\" scriva il nome e il numero di telefono degli sportelli.",
       "Nella Home ci sono due pulsanti, \"Tornare al qui e ora\" e \"Piano per i momenti difficili\".\nToccandoli, ciò che ha scritto nella stanza compare una schermata alla volta.\nSi va avanti con \"Avanti\" e \"Precedente\", e con \"Chiudi\" si torna alla Home.",
@@ -1098,6 +1128,9 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Não foi possível importar",
     "importConfirm": "O conteúdo atual será substituído pelo conteúdo da cópia. Importar?",
     "note": "Tudo o que for escrito fica guardado apenas neste aparelho. Nada é enviado para fora.",
+    "editOpt": "Botão da sala de escrita",
+    "editOpen": "Abrir a sala de escrita",
+    "importConfirmDate": "Esta cópia é de {d}. O conteúdo atual será substituído pelo conteúdo da cópia. Importar?",
     "privacy": "Política de privacidade",
     "credit": "Desenvolvido por SOYOGI, espaço de aconselhamento sobre cuidados e apoio"
   },
@@ -1159,7 +1192,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "A forma de respirar que ajuda e as coisas que acalmam ao tocar, com as próprias palavras.",
         "signs": "Os sinais escolhidos pela própria pessoa:\"quando fico assim, é perigoso\".",
         "contacts": "Nome e número de telefone. Não é preciso escrever tudo.",
-        "windows": "O 119 (ambulância) e o 110 (polícia), números de emergência do Japão, aparecem sempre. Outras linhas de apoio podem ser adicionadas.",
+        "windows": "O 119 (ambulância) e o 110 (polícia), números de emergência do Japão, aparecem sempre. Outras linhas de apoio podem ser adicionadas. Confirme o número no site oficial e escreva-o. Por exemplo: Yorisoi Hotline, Inochi no Denwa (Japão).",
         "steps": "Um passo por linha. Aparecem um de cada vez, de cima para baixo.",
         "plan": "Um passo por linha. Aparecem depois de \"Quando a luz está amarela\".",
         "yellow": "Quando ainda não é perigoso, mas há cansaço. A forma de descansar e um pequeno passo, só um."
@@ -1175,6 +1208,8 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Para baixo",
       "yellowRest": "Como descansar (com as próprias palavras)",
       "yellowStep": "Um pequeno passo (só um)",
+      "try": "Experimentar",
+      "longHint": "Convém que o texto de cada ecrã seja curto.",
       "textPh": "Escrever aqui",
       "saved": "Guardado ✓"
     }
@@ -1196,7 +1231,7 @@ TBL.pt = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Nos momentos difíceis, esta ferramenta mostra, um de cada vez, os passos decididos pela própria pessoa quando estava bem.\nNão substitui os cuidados médicos.\nEm caso de perigo, ligar para o 119 (ambulância), para o 110 (polícia) ou para uma linha de apoio. O 119 e o 110 são números do Japão.",
-      "Os passos escrevem-se num momento em que se está bem.\nAo tocar 5 vezes seguidas no nome que aparece no topo, abre-se a \"Sala de escrita\".\nNão há nenhum botão para entrar na sala. Este guia não volta a aparecer depois de lido até ao fim, por isso convém lembrar como se abre.",
+      "Os passos escrevem-se num momento em que se está bem.\nAo tocar 5 vezes seguidas no nome que aparece no topo, abre-se a \"Sala de escrita\".\nNormalmente não há nenhum botão para entrar na sala. Quem usa um leitor de ecrã ou controlo por interruptor pode ativar “Botão da sala de escrita” em “Ajustes”: aparece um botão para a abrir. Este guia não volta a aparecer depois de lido até ao fim, por isso convém lembrar como se abre.",
       "A sala tem 9 partes, por exemplo \"O lugar onde estou\" e \"Palavras para mim\".\nAo tocar numa parte e escrever, o que foi escrito fica logo guardado. Não é preciso preencher tudo.\n\"Feito\" volta à lista. A sala fecha ao tocar em \"Fechar\" ou ao sair da aplicação.",
       "Os passos de \"Voltar ao aqui e agora\" e do \"Plano para os momentos difíceis\" escrevem-se um por linha.\nCom \"＋ Adicionar um passo\" junta-se uma linha, e com ↑ ↓ muda-se a ordem.\nEm \"Linhas de apoio\" escrevem-se o nome e o número de telefone das linhas de apoio.",
       "No Início há dois botões, \"Voltar ao aqui e agora\" e \"Plano para os momentos difíceis\".\nAo tocar num deles, o que foi escrito na sala aparece um de cada vez.\nAvança-se com \"Avançar\" e \"Anterior\", e volta-se ao Início com \"Fechar\".",
@@ -1291,6 +1326,9 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Importeren is niet gelukt",
     "importConfirm": "Wat u nu hebt, wordt vervangen door de inhoud van het bestand. Wilt u importeren?",
     "note": "Alles wat u schrijft, wordt alleen op dit apparaat bewaard. Er wordt niets verstuurd.",
+    "editOpt": "Knop voor de invoerruimte",
+    "editOpen": "Invoerruimte openen",
+    "importConfirmDate": "Dit bestand is van {d}. Wat u nu hebt, wordt vervangen door de inhoud van het bestand. Wilt u importeren?",
     "privacy": "Privacybeleid",
     "credit": "App-ontwikkeling: SOYOGI, adviespunt voor zorg en ondersteuning"
   },
@@ -1352,7 +1390,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "De ademhaling die bij u past en de dingen die u rust geven als u ze aanraakt, in uw eigen woorden.",
         "signs": "De signalen waarvan u zelf hebt bepaald: \"als dit gebeurt, wordt het gevaarlijk\".",
         "contacts": "Naam en telefoonnummer. U hoeft niet alles in te vullen.",
-        "windows": "119 (ambulance) en 110 (politie), de alarmnummers in Japan, staan er altijd bij. Andere hulplijnen kunt u zelf toevoegen.",
+        "windows": "119 (ambulance) en 110 (politie), de alarmnummers in Japan, staan er altijd bij. Andere hulplijnen kunt u zelf toevoegen. Controleer het nummer op de officiële website en vul het zelf in. Bijvoorbeeld: Yorisoi Hotline, Inochi no Denwa (Japan).",
         "steps": "Eén stap per regel. Ze verschijnen op volgorde, van boven naar beneden.",
         "plan": "Eén stap per regel. Ze verschijnen na \"Bij geel licht\".",
         "yellow": "Nog niet gevaarlijk, maar wel moe. Hoe u uitrust, en maar één kleine stap."
@@ -1368,6 +1406,8 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Omlaag",
       "yellowRest": "Hoe ik uitrust (in mijn eigen woorden)",
       "yellowStep": "Eén kleine stap (maar één)",
+      "try": "Even proberen",
+      "longHint": "Houd de tekst van één scherm kort.",
       "textPh": "Schrijf hier",
       "saved": "Opgeslagen ✓"
     }
@@ -1389,7 +1429,7 @@ TBL.nl = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Deze app laat in moeilijke momenten, scherm voor scherm, de stappen zien die u zelf hebt bepaald toen het goed met u ging.\nHet is geen vervanging van medische zorg.\nAls het gevaarlijk wordt, neem dan contact op met 119 (ambulance, Japan), 110 (politie, Japan) of een hulplijn.",
-      "U schrijft uw stappen op wanneer het goed met u gaat.\nTik 5 keer achter elkaar op de naam van de app bovenaan, dan gaat de \"Invoerruimte\" open.\nEr is geen knop naar deze ruimte. Deze uitleg verschijnt niet meer als u hem tot het einde hebt gelezen. Onthoud dus hoe u de ruimte opent.",
+      "U schrijft uw stappen op wanneer het goed met u gaat.\nTik 5 keer achter elkaar op de naam van de app bovenaan, dan gaat de \"Invoerruimte\" open.\nNormaal is er geen knop naar deze ruimte. Gebruikt u een schermlezer of schakelbediening, zet dan in “Instellingen” “Knop voor de invoerruimte” aan: er verschijnt een knop om de ruimte te openen. Deze uitleg verschijnt niet meer als u hem tot het einde hebt gelezen. Onthoud dus hoe u de ruimte opent.",
       "De ruimte heeft 9 onderdelen, zoals \"Waar ik nu ben\" en \"Woorden voor mezelf\".\nTik op een onderdeel en schrijf. Alles wordt meteen bewaard. U hoeft niet alles in te vullen.\nMet \"Klaar\" gaat u terug naar de lijst. De ruimte sluit als u op \"Sluiten\" tikt of de app verlaat.",
       "Schrijf de stappen voor \"Terug naar het hier en nu\" en \"Plan voor gevaarlijke momenten\" één per regel.\nMet \"＋ Stap toevoegen\" voegt u een regel toe, met ↑ ↓ verandert u de volgorde.\nBij \"Hulplijnen\" schrijft u de naam en het telefoonnummer van hulplijnen.",
       "Op Home staan twee knoppen, \"Terug naar het hier en nu\" en \"Plan voor gevaarlijke momenten\".\nAls u erop tikt, verschijnt wat u in de ruimte hebt geschreven, scherm voor scherm.\nGa verder met \"Volgende\" en \"Vorige\", en ga met \"Sluiten\" terug naar Home.",
@@ -1484,6 +1524,9 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "Kunde inte importera",
     "importConfirm": "Det du har nu ersätts med innehållet i filen. Vill du importera?",
     "note": "Allt du skriver sparas bara på den här enheten. Inget skickas någonstans.",
+    "editOpt": "Knapp till registreringsrummet",
+    "editOpen": "Öppna registreringsrummet",
+    "importConfirmDate": "Den här filen är från {d}. Det du har nu ersätts med innehållet i filen. Vill du importera?",
     "privacy": "Integritetspolicy",
     "credit": "Apputveckling: SOYOGI, rådgivning för omsorg och stöd"
   },
@@ -1545,7 +1588,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "Andningen som fungerar för dig, och sakerna som lugnar dig när du rör vid dem. Med dina egna ord.",
         "signs": "De tecken som du själv har bestämt betyder \"nu börjar det bli farligt\".",
         "contacts": "Namn och telefonnummer. Du behöver inte fylla i allt.",
-        "windows": "119 (ambulans) och 110 (polis), larmnumren i Japan, visas alltid. Lägg till andra hjälplinjer själv.",
+        "windows": "119 (ambulans) och 110 (polis), larmnumren i Japan, visas alltid. Lägg till andra hjälplinjer själv. Kontrollera numret på den officiella webbplatsen och skriv in det själv. Till exempel: Yorisoi Hotline, Inochi no Denwa (Japan).",
         "steps": "Ett steg per rad. De visas uppifrån, ett i taget.",
         "plan": "Ett steg per rad. De visas efter \"När ljuset är gult\".",
         "yellow": "Inte farligt än, men trött. Hur du vilar, och bara ett litet steg."
@@ -1561,6 +1604,8 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "Ner",
       "yellowRest": "Så här vilar jag (med egna ord)",
       "yellowStep": "Ett litet steg (bara ett)",
+      "try": "Prova",
+      "longHint": "Håll texten på varje skärm kort.",
       "textPh": "Skriv här",
       "saved": "Sparat ✓"
     }
@@ -1582,7 +1627,7 @@ TBL.sv = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "Den här appen visar i svåra stunder, en skärm i taget, de steg du själv bestämde när du mådde bra.\nDen ersätter inte sjukvård.\nOm det är farligt, ring 119 (ambulans), 110 (polis) eller en hjälplinje. Numren 119 och 110 gäller i Japan.",
-      "Du skriver dina steg när du mår bra.\nTryck på appens namn högst upp 5 gånger i rad, så öppnas \"Registreringsrummet\".\nDet finns ingen knapp till rummet. Den här guiden visas inte igen när du har läst den till slutet, så kom ihåg hur du öppnar rummet.",
+      "Du skriver dina steg när du mår bra.\nTryck på appens namn högst upp 5 gånger i rad, så öppnas \"Registreringsrummet\".\nNormalt finns det ingen knapp till rummet. Om du använder skärmläsare eller kontaktstyrning, slå på “Knapp till registreringsrummet” i “Inställningar” så visas en knapp för att öppna rummet. Den här guiden visas inte igen när du har läst den till slutet, så kom ihåg hur du öppnar rummet.",
       "Rummet har 9 delar, till exempel \"Platsen där jag är nu\" och \"Ord till mig själv\".\nTryck på en del och skriv. Det sparas medan du skriver. Du behöver inte fylla i allt.\n\"Klart\" tar dig tillbaka till listan. Rummet stängs när du trycker på \"Stäng\" eller lämnar appen.",
       "Skriv stegen för \"Tillbaka till här och nu\" och \"Plan för farliga stunder\", ett per rad.\nMed \"＋ Lägg till ett steg\" lägger du till en rad, och med ↑ ↓ ändrar du ordningen.\nUnder \"Hjälplinjer\" skriver du namn och telefonnummer till hjälplinjer.",
       "På Hem finns två knappar, \"Tillbaka till här och nu\" och \"Plan för farliga stunder\".\nNär du trycker på en av dem visas det du skrev i rummet, en skärm i taget.\nGå vidare med \"Nästa\" och \"Föregående\", och tillbaka till Hem med \"Stäng\".",
@@ -1677,6 +1722,9 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "가져오지 못했어요",
     "importConfirm": "지금 내용은 파일의 내용으로 바뀌어요. 가져올까요?",
     "note": "쓴 내용은 모두 이 기기 안에만 저장돼요. 어디에도 보내지 않아요.",
+    "editOpt": "등록하는 방 버튼",
+    "editOpen": "등록하는 방 열기",
+    "importConfirmDate": "{d}에 만든 파일이에요. 지금 내용은 파일의 내용으로 바뀌어요. 가져올까요?",
     "privacy": "개인정보 처리방침",
     "credit": "앱 개발: 돌봄과 지원 상담소 SOYOGI"
   },
@@ -1738,7 +1786,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "나에게 맞는 호흡 방법이나, 만지면 차분해지는 것을, 나의 말로.",
         "signs": "'이렇게 되면 위험하다'고 스스로 정한 신호.",
         "contacts": "이름과 전화번호. 전부 쓰지 않아도 괜찮아요.",
-        "windows": "일본의 긴급 번호인 119(구급)·110(경찰)은 항상 나와요. 다른 창구는 직접 더해 주세요.",
+        "windows": "일본의 긴급 번호인 119(구급)·110(경찰)은 항상 나와요. 다른 창구는 직접 더해 주세요. 번호는 공식 사이트에서 확인해서 직접 넣어 주세요. 예: 요리소이 핫라인, 이노치노 덴와(일본).",
         "steps": "한 단계를 한 줄로. 위에서부터 차례로 나와요.",
         "plan": "한 단계를 한 줄로. '노란 신호일 때' 다음에 나와요.",
         "yellow": "아직 위험하지는 않지만 지쳐 있을 때. 쉬는 방법과, 작은 한 걸음을 하나만."
@@ -1754,6 +1802,8 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "아래로",
       "yellowRest": "쉬는 방법(나의 말로)",
       "yellowStep": "작은 한 걸음(하나만)",
+      "try": "미리 열어 보기",
+      "longHint": "한 화면에 읽을 글은 짧게 해 주세요.",
       "textPh": "여기에 써요",
       "saved": "저장했어요 ✓"
     }
@@ -1775,7 +1825,7 @@ TBL.ko = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "이 앱은 마음이 괜찮을 때 스스로 정한 순서를, 힘들 때 한 화면씩 보여 주는 도구예요.\n의료를 대신하지는 않아요.\n위험할 때는 119(구급)·110(경찰) 같은 일본의 긴급 번호나 상담 창구에 연락해 주세요.",
-      "순서는 마음이 괜찮을 때 써 두어요.\n맨 위의 앱 이름을 5번 연속으로 누르면 '등록하는 방'이 열려요.\n방으로 들어가는 버튼은 없어요. 이 안내는 끝까지 읽으면 다시 나오지 않으니, 여는 법을 기억해 주세요.",
+      "순서는 마음이 괜찮을 때 써 두어요.\n맨 위의 앱 이름을 5번 연속으로 누르면 '등록하는 방'이 열려요.\n보통은 방으로 들어가는 버튼이 없어요. 화면 읽기나 스위치로 쓰는 분은 '설정'에서 '등록하는 방 버튼'을 켜면 여는 버튼이 나와요. 이 안내는 끝까지 읽으면 다시 나오지 않으니, 여는 법을 기억해 주세요.",
       "방에는 '지금 있는 곳', '나에게 하는 말' 등 9개 항목이 있어요.\n항목을 누르고 쓰면 쓰는 동안 바로 저장돼요. 다 쓰지 않아도 괜찮아요.\n'완료'를 누르면 항목 목록으로 돌아가요. '닫기'를 누르거나 앱을 벗어나면 방이 닫혀요.",
       "'지금 여기로 돌아오기'와 '위험할 때의 계획'의 순서는 한 줄에 하나씩 써요.\n'＋ 단계 추가'로 줄을 늘리고, ↑ ↓로 차례를 바꿔요.\n'상담 창구'에는 창구의 이름과 전화번호를 써요.",
       "홈에는 '지금 여기로 돌아오기'와 '위험할 때의 계획' 두 버튼이 있어요.\n누르면 방에서 쓴 내용이 한 화면에 하나씩 나와요.\n'다음'과 '이전'으로 넘기고, '닫기'로 홈에 돌아가요.",
@@ -1870,6 +1920,9 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "无法导入",
     "importConfirm": "现在的内容会被文件里的内容替换。要导入吗?",
     "note": "写下的内容全部只保存在这台设备里，不会发送到任何地方。",
+    "editOpt": "登记房间按钮",
+    "editOpen": "打开登记的房间",
+    "importConfirmDate": "这是 {d} 的文件。现在的内容会被文件里的内容替换。要导入吗?",
     "privacy": "隐私政策",
     "credit": "应用开发：照护与支援咨询处 SOYOGI"
   },
@@ -1931,7 +1984,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "用自己的话写下对自己有用的呼吸方式，以及摸了会平静下来的东西。",
         "signs": "自己定下的“变成这样就危险了”的信号。",
         "contacts": "名字和电话号码。不用全部填写也没关系。",
-        "windows": "119(急救)和 110(警察)是日本的号码，会一直显示。其他窗口请自己添加。",
+        "windows": "119(急救)和 110(警察)是日本的号码，会一直显示。其他窗口请自己添加。 号码请在官方网站确认后自己填入。例如：Yorisoi Hotline、Inochi no Denwa(日本)。",
         "steps": "一个步骤写一行。会从上到下按顺序显示。",
         "plan": "一个步骤写一行。会在“黄灯的时候”之后显示。",
         "yellow": "还不到危险，但感到累的时候。写下休息的方式，和小小的一步(只写一个)。"
@@ -1947,6 +2000,8 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "向下",
       "yellowRest": "休息的方式(用自己的话)",
       "yellowStep": "小小的一步(只写一个)",
+      "try": "试着打开看看",
+      "longHint": "一屏上要读的话请尽量短。",
       "textPh": "在这里写",
       "saved": "已保存 ✓"
     }
@@ -1968,7 +2023,7 @@ TBL.zh = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "这个应用会把状态好的时候自己定下的步骤，在难受的时候一次一屏地显示出来。\n它不能代替医疗。\n遇到危险时，请联系日本的 119(急救)、110(警察)，或者咨询窗口。",
-      "步骤要在状态好的时候先写好。\n连续点按最上方的应用名称 5 次，就会打开“登记的房间”。\n没有进入房间的按钮。这份说明读到最后就不会再出现，请记住打开的方法。",
+      "步骤要在状态好的时候先写好。\n连续点按最上方的应用名称 5 次，就会打开“登记的房间”。\n平时没有进入房间的按钮。使用读屏或开关控制的人，可以在“设置”里打开“登记房间按钮”，这样就会出现打开按钮。这份说明读到最后就不会再出现，请记住打开的方法。",
       "房间里有“现在所在的地方”“给自己的话”等 9 个项目。\n点按项目后书写，写的同时就会保存。不用全部写完也没关系。\n点“完成”回到项目列表。点“关闭”或离开应用，房间就会关上。",
       "“回到此时此地”和“危险时的计划”的步骤，一行写一个。\n用“＋ 添加步骤”增加一行，用 ↑ ↓ 调整顺序。\n在“咨询窗口”里写下窗口的名称和电话号码。",
       "首页有“回到此时此地”和“危险时的计划”两个按钮。\n点按后，在房间里写下的内容会一次一屏地显示出来。\n用“下一个”“上一个”翻页，点“关闭”回到首页。",
@@ -2063,6 +2118,9 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     "importFail": "تعذّر الاستيراد",
     "importConfirm": "سيُستبدل المحتوى الحالي بمحتوى الملف. هل تريد الاستيراد؟",
     "note": "كل ما يُكتب هنا يُحفظ في هذا الجهاز فقط. ولا يُرسل إلى أي مكان.",
+    "editOpt": "زر غرفة التسجيل",
+    "editOpen": "فتح غرفة التسجيل",
+    "importConfirmDate": "هذا ملف بتاريخ {d}. سيُستبدل المحتوى الحالي بمحتوى الملف. هل تريد الاستيراد؟",
     "privacy": "سياسة الخصوصية",
     "credit": "تطوير التطبيق: SOYOGI، خدمة استشارات للرعاية والدعم"
   },
@@ -2124,7 +2182,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
         "calm": "طريقة التنفّس التي تناسبني، والأشياء التي أهدأ عند لمسها، بكلماتي الخاصة.",
         "signs": "العلامات التي قررتها بنفسي: «إذا حدث هذا، فالأمر خطر».",
         "contacts": "الاسم ورقم الهاتف. لا داعي لكتابة كل شيء.",
-        "windows": "الرقمان 119 (الإسعاف) و110 (الشرطة) في اليابان يظهران دائمًا. أما الجهات الأخرى فيمكن إضافتها بنفسك.",
+        "windows": "الرقمان 119 (الإسعاف) و110 (الشرطة) في اليابان يظهران دائمًا. أما الجهات الأخرى فيمكن إضافتها بنفسك. تحقق من الرقم في الموقع الرسمي وأدخله بنفسك. مثلًا: Yorisoi Hotline وInochi no Denwa (اليابان).",
         "steps": "خطوة واحدة في كل سطر. تُعرض بالترتيب من الأعلى.",
         "plan": "خطوة واحدة في كل سطر. تُعرض بعد «عند الإشارة الصفراء».",
         "yellow": "حين لا يوجد خطر بعد، لكن هناك تعب. كيف أرتاح، وخطوة صغيرة واحدة فقط."
@@ -2140,6 +2198,8 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
       "down": "إلى الأسفل",
       "yellowRest": "كيف أرتاح (بكلماتي الخاصة)",
       "yellowStep": "خطوة صغيرة (واحدة فقط)",
+      "try": "جرّب العرض",
+      "longHint": "اجعل النص في كل شاشة قصيرًا.",
       "textPh": "اكتب هنا",
       "saved": "تم الحفظ ✓"
     }
@@ -2161,7 +2221,7 @@ TBL.ar = mergeDeep(JSON.parse(JSON.stringify(en)), {
     ],
     "bodies": [
       "هذا التطبيق أداة تعرض، في الأوقات الصعبة، الخطوات التي قررتها بنفسك حين كنت بخير، شاشة واحدة في كل مرة.\nهو ليس بديلًا عن الرعاية الطبية.\nعند الخطر، يُرجى الاتصال بالرقم 119 (الإسعاف) أو 110 (الشرطة) في اليابان، أو بجهة استشارة.",
-      "تُكتب الخطوات في وقت تكون فيه بخير.\nاضغط على اسم التطبيق في الأعلى 5 مرات متتالية، فتُفتح «غرفة التسجيل».\nلا يوجد زر للدخول إلى الغرفة. ولن يظهر هذا الدليل مرة أخرى بعد قراءته حتى النهاية، فتذكّر طريقة فتحها.",
+      "تُكتب الخطوات في وقت تكون فيه بخير.\nاضغط على اسم التطبيق في الأعلى 5 مرات متتالية، فتُفتح «غرفة التسجيل».\nفي العادة لا يوجد زر للدخول إلى الغرفة. ومن يستخدم قارئ الشاشة أو التحكم بالمفتاح يمكنه تشغيل «زر غرفة التسجيل» من «الإعدادات»، فيظهر زر للفتح. ولن يظهر هذا الدليل مرة أخرى بعد قراءته حتى النهاية، فتذكّر طريقة فتحها.",
       "في الغرفة 9 أقسام، مثل «المكان الذي أنا فيه الآن» و«كلمات لنفسي».\nاضغط على قسم واكتب، فيُحفظ ما تكتبه فورًا. لا داعي لكتابة كل شيء.\nيعيدك زر «تم» إلى قائمة الأقسام. وتُغلق الغرفة عند الضغط على «إغلاق» أو عند مغادرة التطبيق.",
       "اكتب خطوات «العودة إلى هنا والآن» و«خطة وقت الخطر»، خطوة واحدة في كل سطر.\nأضف سطرًا بزر «＋ إضافة خطوة»، وغيّر الترتيب بالسهمين ↑ ↓.\nفي «جهات الاستشارة» اكتب اسم الجهة ورقم هاتفها.",
       "في الرئيسية زرّان، «العودة إلى هنا والآن» و«خطة وقت الخطر».\nعند الضغط على أحدهما، يظهر ما كتبته في الغرفة شاشة واحدة في كل مرة.\nتنقّل بزرّي «التالي» و«السابق»، وارجع إلى الرئيسية بزر «إغلاق».",

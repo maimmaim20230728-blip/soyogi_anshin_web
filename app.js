@@ -9,7 +9,7 @@
      変えたら README の「シェルの変更点」に書く */
 (function(){
 
-var VER = '0.4.10';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
+var VER = '0.4.11';                 // 🔴 更新のたびに上げる(build.gradle の versionName / sw.js の CACHE と一緒に)
 var APP_KEY = 'soyogi_anshin';        // バックアップの識別(別アプリのファイルを読まない)
 var LS = 'anshin.';
 var LS_PREF = LS + 'pref.v1';
@@ -49,6 +49,8 @@ function sanitizePref(p){
 }
 var pref = sanitizePref(loadJSON(LS_PREF));
 function savePref(){ saveJSON(LS_PREF, pref); }
+/* とうろくの へやを ひらく ボタン(せってい)。既定は出さない(隠れた入口のまま)。画面読み上げ・スイッチ操作で使う人が自分でONにする */
+function editBtnOn(){ return pref.extra.editBtn === true; }
 function next(list, cur){ return list[(list.indexOf(cur) + 1) % list.length]; }
 
 /* ---- i18n ---- */
@@ -66,6 +68,7 @@ var I18N_MAP = {
   'lbl-guide':'guide.title', 'btn-guide':'guide.again',   // はじめての つかいかた(せっていの行)
   'hd-title':'app.name', 'hd-exit':'app.exit',
   'set-h-normal':'set.hNormal', 'set-h-backup':'set.hBackup',
+  'lbl-editopt':'set.editOpt', 'btn-editopen':'set.editOpen',   // とうろくの へやの ボタン(せってい・任意)
   'lbl-fs':'set.fs', 'lbl-theme':'set.theme', 'lbl-bgm':'set.bgm', 'lbl-sound':'set.sound',
   'bk-hint':'set.bkHint', 'bk-export':'set.bkExport', 'bk-import':'set.bkImport',
   'set-note':'set.note', 'link-privacy':'set.privacy', 'about-credit':'set.credit'
@@ -83,6 +86,8 @@ function applyI18n(){
   if($('btn-theme')) $('btn-theme').textContent = T('set.themes')[THEMES.indexOf(pref.theme)];
   if($('btn-bgm'))   $('btn-bgm').textContent   = T('set.bgms')[BGMS.indexOf(pref.bgm)];
   if($('btn-sound')) $('btn-sound').textContent = pref.sound ? T('set.on') : T('set.off');
+  if($('btn-editopt')) $('btn-editopt').textContent = editBtnOn() ? T('set.on') : T('set.off');
+  if($('set-edit-open-row')) $('set-edit-open-row').classList.toggle('hidden', !editBtnOn());
   if($('about-ver')) $('about-ver').textContent = 'v' + VER;
   document.title = T('app.name');
   fitTitle();
@@ -559,7 +564,12 @@ function importBackup(e){
       if(!d || d.app !== APP_KEY) throw new Error('different app');
       if(!d.data || typeof d.data !== 'object' || Array.isArray(d.data)) throw new Error('bad data');
     }catch(err){ toast(T('set.importFail')); return; }
-    askBox(T('set.importConfirm'), function(ok){   // Play版はアプリの中の窓(はい/いいえ)・Web版は window.confirm
+    /* ファイルの書き出し日(exported)があれば出す(古いファイルで上書きする事故を減らす・「2026/10/30 の ファイルです」)。無い・読めない日付は今までの文 */
+    var ask = T('set.importConfirm'), ex = new Date(d.exported);
+    if(typeof d.exported === 'number' && !isNaN(ex.getTime())){
+      ask = T('set.importConfirmDate').replace('{d}', ex.getFullYear() + '/' + String(ex.getMonth() + 1).padStart(2, '0') + '/' + String(ex.getDate()).padStart(2, '0'));
+    }
+    askBox(ask, function(ok){   // Play版はアプリの中の窓(はい/いいえ)・Web版は window.confirm
       if(!ok) return;
       if(!replaceData(d.data)){ toast(T('set.importFail')); return; }
       pref = sanitizePref(d.pref);
@@ -652,6 +662,12 @@ function init(){
   Tap.bind($('btn-theme'), function(){ pref.theme = next(THEMES, pref.theme); applyTheme(); savePref(); applyI18n(); });
   Tap.bind($('btn-bgm'), function(){ pref.bgm = next(BGMS, pref.bgm); applySound(true); savePref(); applyI18n(); });
   Tap.bind($('btn-sound'), function(){ pref.sound = !pref.sound; Sound.setEnabled(pref.sound); savePref(); applyI18n(); });
+  Tap.bind($('btn-editopt'), function(){ pref.extra.editBtn = !editBtnOn(); savePref(); applyI18n(); });
+  Tap.bind($('btn-editopen'), function(){
+    var ed = window.SCREENS && window.SCREENS.get('edit');
+    if(ed && typeof ed.reset === 'function') ed.reset();   // いつも入口から
+    showScreen('edit');
+  });
   if($('set-lang')) $('set-lang').addEventListener('change', function(){ pref.lang = $('set-lang').value; savePref(); applyI18n(); });
   Tap.bind($('bk-export'), exportBackup);
   Tap.bind($('bk-import'), function(){ $('bk-file').click(); });
